@@ -1,75 +1,58 @@
 package com.dung.manageapartment.entity;
 
 import com.dung.manageapartment.entity.Resident;
+import com.dung.manageapartment.model.ApartmentDTO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
+@Data
 @Table(name = "apartment")
 public class Apartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name="id")
     private Long id;
 
-    private String apartmentId;
+    private String name;
+    private Double area;
+    private Integer num_rooms;
 
-    private Double apartmentArea;
-
-    private Integer numberOfRooms;
+    @Column(name = "deleted", columnDefinition = "boolean default false")
+    private Boolean deleted = false;
 
     @OneToMany(mappedBy = "apartment", cascade = CascadeType.ALL)
     private List<Resident> residents = new ArrayList<>();
 
-    // constructors, getters, setters
+    public Apartment edit(ApartmentDTO dto) {
+        if (Objects.nonNull(dto.getArea())) {
+            this.area = dto.getArea();
+        }
+        if (Objects.nonNull(dto.getName())) {
+            this.name = dto.getName();
+        }
+        if (Objects.nonNull(dto.getNum_rooms())) {
+            this.num_rooms = dto.getNum_rooms();
+        }
+        this.name = dto.getName();
+        this.area = dto.getArea();
+        this.num_rooms = dto.getNum_rooms();
 
-    public Long getId() {
-        return id;
+        return this;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Apartment delete() {
+        this.deleted = true;
+        return this;
     }
 
-    public String getApartmentId() {
-        return apartmentId;
-    }
 
-    public void setApartmentId(String apartmentId) {
-        this.apartmentId = apartmentId;
-    }
-
-    public Double getApartmentArea() {
-        return apartmentArea;
-    }
-
-    public void setApartmentArea(Double apartmentArea) {
-        this.apartmentArea = apartmentArea;
-    }
-
-    public Integer getNumberOfRooms() {
-        return numberOfRooms;
-    }
-
-    public void setNumberOfRooms(Integer numberOfRooms) {
-        this.numberOfRooms = numberOfRooms;
-    }
-
-    public List<Resident> getResidents() {
-        return residents;
-    }
-
-    public void setResidents(List<Resident> residents) {
-        this.residents = residents;
-    }
-
-    public Apartment(Long id, String apartmentId, Double apartmentArea, Integer numberOfRooms, List<Resident> residents) {
-        this.id = id;
-        this.apartmentId = apartmentId;
-        this.apartmentArea = apartmentArea;
-        this.numberOfRooms = numberOfRooms;
-        this.residents = residents;
-    }
 }

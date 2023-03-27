@@ -1,14 +1,25 @@
 package com.dung.manageapartment.entity;
 
+import com.dung.manageapartment.constant.BillStatus;
 import com.dung.manageapartment.entity.Resident;
 import com.dung.manageapartment.entity.Utility;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "Bills")
+@Data
+@Table(name = "bill")
 public class Bill {
+    @ManyToMany
+    @JoinTable(
+            name = "bill_utility",
+            joinColumns = @JoinColumn(name = "bill_id"),
+            inverseJoinColumns = @JoinColumn(name = "utility_id"))
+    private Set<Utility> utilities;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bill_id")
@@ -25,44 +36,11 @@ public class Bill {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name ="month")
+    private Date month;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Resident getResident() {
-        return resident;
-    }
-
-    public void setResident(Resident resident) {
-        this.resident = resident;
-    }
-
-    public Utility getUtility() {
-        return utility;
-    }
-
-    public void setUtility(Utility utility) {
-        this.utility = utility;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Bill(Long id, Resident resident, Utility utility, BigDecimal amount) {
-        this.id = id;
-        this.resident = resident;
-        this.utility = utility;
-        this.amount = amount;
-    }
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private BillStatus status;
     // Constructors, Getters, Setters
 }

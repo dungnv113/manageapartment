@@ -1,36 +1,31 @@
 package com.dung.manageapartment.model;
 
+import com.dung.manageapartment.entity.Apartment;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Primary;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ApartmentDTO {
-//    apartment_id (Primary Key): mã căn hộ
-//    area: diện tích của căn hộ
-//    num_rooms: số phòng của căn hộ
-    private int apartment_id;
-    private Long area;
-    private int num_rooms;
 
-    public int getApartment_id() {
-        return apartment_id;
+    private Long id;
+    private Double area;
+    private Integer num_rooms;
+
+    private String name;
+
+    private Boolean deleted = false;
+
+    public static ApartmentDTO mapper(Apartment apartment){
+        return ApartmentDTO.builder()
+                .area(apartment.getArea())
+                .num_rooms(apartment.getNum_rooms())
+                .name(apartment.getName())
+                .build();
     }
 
-    public void setApartment_id(int apartment_id) {
-        this.apartment_id = apartment_id;
-    }
-
-    public Long getArea() {
-        return area;
-    }
-
-    public void setArea(Long area) {
-        this.area = area;
-    }
-
-    public int getNum_rooms() {
-        return num_rooms;
-    }
-
-    public void setNum_rooms(int num_rooms) {
-        this.num_rooms = num_rooms;
-    }
 }
