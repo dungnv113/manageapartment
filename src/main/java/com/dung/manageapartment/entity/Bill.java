@@ -26,7 +26,7 @@ public class Bill {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resident_id", referencedColumnName = "resident_id")
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private Resident resident;
 
     @ManyToOne(fetch = FetchType.LAZY)

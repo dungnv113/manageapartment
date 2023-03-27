@@ -12,10 +12,10 @@ import java.time.LocalDate;
 @Data
 @Table(name = "resident")
 public class Resident {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long resident_id;
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String name;
 

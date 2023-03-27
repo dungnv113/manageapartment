@@ -18,8 +18,8 @@ import java.util.Objects;
 public class Apartment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name="id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private Long id;
 
     private String name;

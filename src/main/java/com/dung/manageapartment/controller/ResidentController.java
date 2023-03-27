@@ -19,16 +19,20 @@ import javax.validation.Valid;
 public class ResidentController {
     private final ResidentService residentService;
     private final ApartmentService apartmentService;
+
+    //show resident
     @GetMapping()
     public String listResident(Model model){
         model.addAttribute("residents",residentService.getAll());
         model.addAttribute("products",apartmentService.getAll());
         return "/admin/viewResident.html";
     }
-//
+
+    //add new resident
     @GetMapping("/add")
     public String addResident(Model model){
         model.addAttribute("resident", new ResidentDTO());
+        model.addAttribute("listAparments",apartmentService.getAll());
         return "admin/addResident";
     }
 
@@ -37,10 +41,7 @@ public class ResidentController {
         return result.hasErrors() ? "/admin/addApartment" : residentService.add(dto, model);
     }
 
-
-    //fix
-
-
+    //edit resident information
     @GetMapping("/edit/{id}")
     public String update(@PathVariable(name = "id") Long id, Model model) {
         ResidentDTO getId = residentService.getById(id);
@@ -48,14 +49,17 @@ public class ResidentController {
             return "/error/notFound";
         }
         model.addAttribute("resident", getId);
+        model.addAttribute("listApartment", apartmentService.getAll());
         return "admin/editResident";
     }
 //
-//    @PostMapping("/edit")
-//    public String updatePost(@Valid @ModelAttribute("product") ApartmentDTO dto, BindingResult result, Model model) {
-//        return result.hasErrors() ? "edit/Apartment" : apartmentService.edit(dto);
-//    }
+    @PostMapping("/edit")
+    public String updatePost(@Valid @ModelAttribute("product") ResidentDTO dto, BindingResult result, Model model) {
+        return result.hasErrors() ? "edit/Resident" : residentService.edit(dto);
+    }
 //
+//
+//    //delete resident
 //    @GetMapping("/delete/{id}")
 //    public String deleteApartment(@PathVariable("id") Long id, Model model){
 //        return apartmentService.delete(id);

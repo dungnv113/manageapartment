@@ -9,10 +9,9 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface ResidentRepository extends JpaRepository<Resident, Long> {
-    Optional<Resident> findByResident_idAndDeletedFalse(Long resident_id, Boolean deleted);
-    List<Resident> getByDeleted(Boolean deleted);
+    List<Resident> getAllByDeleted(Boolean deleted);
 
-//    Optional<Resident> findByIdAndDeletedFalse(Long id, Boolean deleted);
+    Optional<Resident> findByIdAndDeletedFalse(Long id, Boolean deleted);
     Optional<Resident> findByNameAndDeleted(String name, Boolean deleted);
 
 

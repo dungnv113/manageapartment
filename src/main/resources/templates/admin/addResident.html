@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Resident</title>
+</head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+      th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<body>
+<div th:replace="/admin/header :: header"></div>
+<div class="container text-center">
+    <div>
+        <H1>
+            <b>Add Resident</b>
+        </H1>
+    </div>
+    <form enctype="multipart/form-data"
+          method="post" style="max-width: 600px; margin: 0 auto;"
+          th:action="@{/admin/resident/add}" th:object="${resident}">
+        <div th:if="${err}">
+            <p style="color : red; text-align: center" th:text="${err}"></p><br>
+        </div>
+<!--        <div class="m-3">-->
+            <!------ Image 1 --------->
+<!--            <div class="form-group row">-->
+<!--                <label class="col-form-label col-sm-4" for="1">Ảnh 1:</label>-->
+<!--                <div class="col-sm-6">-->
+<!--                    <input accept="image/png,image/jpeg/webp" id="fileImage1" name="primaryImage" required-->
+<!--                           th:field="*{imageMain}" type="file"/>-->
+<!--                    <p><img alt="Image Preview" id="thumbnail1" style="height:200px; width:200px;display: none"></p>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <!------- Image 2 --------->
+<!--            <div class="form-group row">-->
+<!--                <label class="col-form-label col-sm-4" for="1">Ảnh 2:</label>-->
+<!--                <div class="col-sm-6">-->
+<!--                    <input accept="image/png,image/jpeg/webp" class="fileImage" id="fileImage2" name="img_sub1" required-->
+<!--                           th:field="*{imageHover}" type="file"/>-->
+<!--                    <p><img alt="Image Preview" id="thumbnail2" style="height:200px; width:200px;display: none"></p>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <!------- Image 3 --------->
+<!--            <div class="form-group row">-->
+<!--                <label class="col-form-label col-sm-4" for="1">Ảnh 3:</label>-->
+<!--                <div class="col-sm-6">-->
+<!--                    <input accept="image/png,image/jpeg/webp" class="fileImage" id="fileImage3" name="img_sub1" required-->
+<!--                           th:field="*{imageSub}" type="file"/>-->
+<!--                    <p><img alt="Image Preview" id="thumbnail3" style="height:200px; width:200px;display: none"></p>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4" for="1">Name:</label>
+                <div class="col-sm-8">
+                    <input class="form-control mb-2 mr-sm-2" id="1"
+                           placeholder="Enter name" th:field="*{name}" type="text">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4" for="4">Apartment:</label>
+                <div class="col-sm-8">
+                    <select class="form-control" required th:field="*{id}">
+                        <th:block th:each="cate: ${listAparments}">
+                            <option th:text="${cate.name}" th:value="${cate.id}"></option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4" for="1">Email:</label>
+                <div class="col-sm-8">
+                    <input class="form-control mb-2 mr-sm-2" id="6"
+                           placeholder="Enter email" th:field="*{email}" type="text">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4" for="3">Phone number:</label>
+                <div class="col-sm-8">
+						<textarea class="form-control mb-2 mr-sm-2" id="8"
+                                  placeholder="Enter phone number" th:field="*{phone}" type="text"></textarea>
+                </div>
+            </div>
+
+<!--            <div class="form-group row">-->
+<!--                <label class="col-form-label col-sm-4" for="2">Price:</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input class="form-control mb-2 mr-sm-2" id="9" min="1" placeholder="Nhập giá phẩm"-->
+<!--                           step="any" th:field="*{price}" type="number">-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4" for="1">ID Number:</label>
+                <div class="col-sm-8">
+                    <input class="form-control mb-2 mr-sm-2" id="6"
+                           placeholder="Enter ID number" th:field="*{idNumber}" type="number">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4" for="1">Gender:</label>
+                <div class="col-sm-8">
+                    <input class="form-control mb-2 mr-sm-2" id="7"
+                           placeholder="Enter gender" th:field="*{gender}" type="text">
+                </div>
+
+
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-form-label col-sm-4" for="1">DOB:</label>-->
+<!--                    <div class="col-sm-8">-->
+<!--                        <input class="form-control mb-2 mr-sm-2" id="7"-->
+<!--                               placeholder="Enter ID number" th:field="*{dateOfBirth}" type="datetime-local">-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+            </div>
+
+<!--            <div class="form-group row">-->
+<!--                <label class="col-form-label col-sm-4" for="1">Quantity:</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input class="form-control mb-2 mr-sm-2" id="9" min="1" placeholder="Nhập giá phẩm"-->
+<!--                           step="any" th:field="*{quantity}" type="number">-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="text-center p-3">
+                <button class="btn btn-primary mb-2" style="height: 38px;"
+                        type="submit">Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div th:replace="/admin/footer :: footer"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#fileImage1').change(function () {
+            showImageThumbnail1(this);
+            document.getElementById('thumbnail1').style.display = "block"
+        });
+
+        $('#fileImage2').change(function () {
+            showImageThumbnail2(this);
+            document.getElementById('thumbnail2').style.display = "block"
+        });
+
+        $('#fileImage3').change(function () {
+            showImageThumbnail3(this);
+            document.getElementById('thumbnail3').style.display = "block"
+        });
+
+    });
+
+    function showImageThumbnail1(fileInput) {
+        file = fileInput.files[0];
+        reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#thumbnail1').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    /* $(document).ready(function(){
+        $('#fileImage2').change(function(){
+            showImageThumbnail(this);
+        });
+    }); */
+
+    function showImageThumbnail2(fileInput) {
+        file = fileInput.files[0];
+        reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#thumbnail2').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    /* $(document).ready(function(){
+        $('#fileImage3').change(function(){
+            showImageThumbnail(this);
+        });
+    }); */
+
+    function showImageThumbnail3(fileInput) {
+        file = fileInput.files[0];
+        reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#thumbnail3').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+</script>
+</body>
+</html>
