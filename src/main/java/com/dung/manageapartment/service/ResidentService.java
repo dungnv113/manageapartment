@@ -9,13 +9,15 @@ public interface ResidentService {
 
     List<ResidentDTO> getAll();
 
-    String add(ResidentDTO rsidentDTO, Model model);
+    String add(ResidentDTO residentDTO, Model model);
 
-    String edit(ResidentDTO residentDTO, Model model);
+    String edit(ResidentDTO residentDTO);
 
 
     ResidentDTO getById(Long id);
 
 
+    String delete(Long id);
 
 }
+;

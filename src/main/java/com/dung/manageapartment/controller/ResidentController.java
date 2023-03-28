@@ -22,17 +22,17 @@ public class ResidentController {
 
     //show resident
     @GetMapping()
-    public String listResident(Model model){
-        model.addAttribute("residents",residentService.getAll());
-        model.addAttribute("products",apartmentService.getAll());
+    public String listResident(Model model) {
+        model.addAttribute("residents", residentService.getAll());
+        model.addAttribute("products", apartmentService.getAll());
         return "/admin/viewResident.html";
     }
 
     //add new resident
     @GetMapping("/add")
-    public String addResident(Model model){
+    public String addResident(Model model) {
         model.addAttribute("resident", new ResidentDTO());
-        model.addAttribute("listAparments",apartmentService.getAll());
+        model.addAttribute("listAparments", apartmentService.getAll());
         return "admin/addResident";
     }
 
@@ -40,6 +40,7 @@ public class ResidentController {
     public String addResident(@Valid @ModelAttribute("resident") ResidentDTO dto, BindingResult result, Model model) {
         return result.hasErrors() ? "/admin/addApartment" : residentService.add(dto, model);
     }
+
 
     //edit resident information
     @GetMapping("/edit/{id}")
@@ -52,16 +53,18 @@ public class ResidentController {
         model.addAttribute("listApartment", apartmentService.getAll());
         return "admin/editResident";
     }
-//
+
+    //
     @PostMapping("/edit")
     public String updatePost(@Valid @ModelAttribute("product") ResidentDTO dto, BindingResult result, Model model) {
         return result.hasErrors() ? "edit/Resident" : residentService.edit(dto);
     }
+
+    //
 //
-//
-//    //delete resident
-//    @GetMapping("/delete/{id}")
-//    public String deleteApartment(@PathVariable("id") Long id, Model model){
-//        return apartmentService.delete(id);
-//    }
+    //delete resident
+    @GetMapping("/delete/{id}")
+    public String deleteResident(@PathVariable("id") Long id, Model model) {
+        return residentService.delete(id);
+    }
 }
