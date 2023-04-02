@@ -1,5 +1,6 @@
 package com.dung.manageapartment.controller;
 
+import com.dung.manageapartment.entity.Apartment;
 import com.dung.manageapartment.model.ApartmentDTO;
 import com.dung.manageapartment.service.ApartmentService;
 import lombok.RequiredArgsConstructor;
@@ -23,24 +24,25 @@ public class ApartmentController {
         return "/admin/view.html";
     }
 
+
     //add mew apartment
     @GetMapping("/add")
     public String addApartment(Model model){
-        model.addAttribute("apartment", new ApartmentDTO());
+        model.addAttribute("apartment", new Apartment());
         return "admin/addApartment";
     }
 
 
     @PostMapping("/add")
-    public String addApartment(@Valid @ModelAttribute("apartment") ApartmentDTO dto, BindingResult result, Model model) {
-        return result.hasErrors() ? "/admin/addApartment" : apartmentService.add(dto);
+    public String addApartment(@Valid @ModelAttribute("apartment") Apartment apartment, BindingResult result, Model model) {
+        return result.hasErrors() ? "/admin/addApartment" : apartmentService.add(apartment);
     }
 
 
     //edit apartment information
     @GetMapping("/edit/{id}")
     public String update(@PathVariable(name = "id") Long id, Model model) {
-        ApartmentDTO getId = apartmentService.getById(id);
+        Apartment getId = apartmentService.getById(id);
         if (getId == null) {
             return "/error/notFound";
         }
@@ -49,7 +51,7 @@ public class ApartmentController {
     }
 
     @PostMapping("/edit")
-    public String updatePost(@Valid @ModelAttribute("product") ApartmentDTO dto, BindingResult result, Model model) {
+    public String updatePost(@Valid @ModelAttribute("product") Apartment dto, BindingResult result, Model model) {
         return result.hasErrors() ? "edit/Apartment" : apartmentService.edit(dto);
     }
 

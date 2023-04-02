@@ -1,25 +1,17 @@
 package com.dung.manageapartment.entity;
 
 import com.dung.manageapartment.constant.BillStatus;
-import com.dung.manageapartment.entity.Resident;
-import com.dung.manageapartment.entity.Utility;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
 @Table(name = "bill")
 public class Bill {
-    @ManyToMany
-    @JoinTable(
-            name = "bill_utility",
-            joinColumns = @JoinColumn(name = "bill_id"),
-            inverseJoinColumns = @JoinColumn(name = "utility_id"))
-    private Set<Utility> utilities;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bill_id")
@@ -29,9 +21,6 @@ public class Bill {
     @JoinColumn(name = "id", referencedColumnName = "id")
     private Resident resident;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "utility_id", referencedColumnName = "utility_id")
-    private Utility utility;
 
     @Column(name = "amount")
     private BigDecimal amount;
@@ -43,4 +32,8 @@ public class Bill {
     @Column(name = "status")
     private BillStatus status;
     // Constructors, Getters, Setters
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "bill_utility", joinColumns = @JoinColumn(name = "bill_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "utility_id", referencedColumnName = "id"))
+    private List<Utility> utilities;
 }

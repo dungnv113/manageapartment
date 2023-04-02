@@ -31,7 +31,7 @@
 		<form style="margin : 5px" th:action="@{/admin/blog}">
 			<a class="btn btn-warning" th:href="@{/admin/apartment/add}">Thêm
 				thông tin căn hộ</b>
-			</a> <input type="text" id="keyword" placeholder="Tìm kiếm"
+			</a> <input style="height:38px;vertical-align:middle;" type="text" id="keyword" placeholder="Tìm kiếm"
 				 name="keyword" th:value="${keyword}">
 			<button type="submit" class="btn btn-primary">Tìm kiếm</button>
 			
@@ -84,8 +84,26 @@
 		</div>
 	</div>
 	<div th:replace="/admin/footer :: footer"></div>
-	
-	
-	<script th:src="@{/js/person.js}"></script>
+
+	<link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("#tableOne").DataTable({
+				lengthMenu: [5, 10, 20, 30], // show entries
+				'columnDefs': [
+					{
+						'searchable': false,
+						'targets': [0, 1, 2, 3, 5, 8, 9, 10] // cac truong k cho search
+						// see https://datatables.net/reference/option/columns.searchable
+					},
+					{
+						'orderable': false,
+						'targets': [1, 2, 3, 4, 10] // cac truong k cho filter
+					},
+				]
+			});
+		});
+	</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.dung.manageapartment.service;
 
+import com.dung.manageapartment.entity.Resident;
 import com.dung.manageapartment.model.ResidentDTO;
 import org.springframework.ui.Model;
 
@@ -7,14 +8,14 @@ import java.util.List;
 
 public interface ResidentService {
 
-    List<ResidentDTO> getAll();
+    List<Resident> getAll();
 
-    String add(ResidentDTO residentDTO, Model model);
+    String add(Resident resident, Model model);
 
-    String edit(ResidentDTO residentDTO);
+    String edit(Resident resident);
 
 
-    ResidentDTO getById(Long id);
+    Resident getById(Long id);
 
 
     String delete(Long id);

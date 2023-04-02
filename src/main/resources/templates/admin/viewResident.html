@@ -26,56 +26,69 @@
 	<div th:replace="/admin/header :: header"></div>
 	<div class="container">
 		<h2>
-			<b> List of resident </b>
+			<b> LIST OF RESIDENT </b>
 		</h2>
 		<form style="margin : 5px" th:action="@{/admin/resident}">
-			<a class="btn btn-warning" th:href="@{/admin/resident/new}">Add new resident</b>
-			</a> <input type="text" id="keyword" placeholder="find"
+			<a class="btn btn-warning" th:href="@{/admin/resident/add}">Add new resident</b>
+			</a>
+			<input style="height:38px;vertical-align:middle;" type="text" id="keyword" placeholder="find"
 				 name="keyword" th:value="${keyword}">
 			<button type="submit" class="btn btn-primary">Find</button>
 
-			<label>Category</label>
-			<select name = "apartment" th:value="${apartment}">
-<!--				<option value="">Choose an option</option>-->
-<!--				<th:block th:each="cate: ${listCategories}">-->
-<!--					<option th:text="${cate.type}" th:value="${cate.type}"></option>-->
-<!--				</th:block>-->
-			</select>
+<!--			<label>Category</label>-->
+<!--			<select name = "apartment" th:value="${apartment}">-->
+<!--&lt;!&ndash;				<option value="">Choose an option</option>&ndash;&gt;-->
+<!--&lt;!&ndash;				<th:block th:each="cate: ${listCategories}">&ndash;&gt;-->
+<!--&lt;!&ndash;					<option th:text="${cate.type}" th:value="${cate.type}"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;				</th:block>&ndash;&gt;-->
+<!--			</select>-->
 		</form>
 		<table
 			class="table table-bordered table-striped table-responsive-stack"
 			id="tableOne">
 			<thead class="thead-dark">
 				<tr>
+
 					<th>Id</th>
 					<th>Name</th>
 					<th>Email</th>
 					<th>Phone</th>
-					<th>ID Number</th>
 					<th>Gender</th>
-                    <th>Date of birth</th>
+					<th>FrontIdCard</th>
+					<th>BackIdCard</th>
+                    <th style="min-width: 133px;">Date of birth</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<th:block th:each="p : ${residents}">
-					<tr><td><span th:text="${p.id}"></span></td>
+					<tr>
+
+						<td><span th:text="${p.id}"></span></td>
 						<td><a style="width: 100px; height: 120px;"
 							   th:text="${p.name}" alt="IMG-LOGO"></a></td>
 						<td><a style="width: 100px; height: 120px;"
 							   th:text="${p.email}" alt="IMG-LOGO"></a></td>
 						<td><a style="width: 100px; height: 120px;"
 							   th:text="${p.phone}" alt="IMG-LOGO"></a></td>
-						<td><a th:text="${p.idNumber}"></a></td>
+<!--						<td><a th:text="${p.idNumber}"></a></td>-->
 						<td><a style="width: 100px; height: 120px;"
 							   th:text="${p.gender}" alt="IMG-LOGO"></a></td>
-						<td><a style="width: 100px; height: 120px;"
-							   th:text="${p.dateOfBirth}" alt="IMG-LOGO"></a></td>
+						<td class="w3-center" style="justify-content: center; width: 20%;">
+							<img style="height: 80px; width: 100%; object-fit: cover;"
+								 th:src="@{'/admin/resident/download1?frontIdCard=' + ${p.frontIdCard}}"/>
+						</td>
+						<td class="w3-center" style="justify-content: center; width: 20%;">
+							<img style="height: 80px; width: 100%; object-fit: cover;"
+								 th:src="@{'/admin/resident/download2?backIdCard=' + ${p.backIdCard}}"/>
+						</td>
+						<td><a
+							   th:text="${#dates.format(p.dateOfBirth, 'yyyy-MM-dd')}" alt="IMG-LOGO"></a></td>
 <!--						<td><span th:text="${p.category.type}"></span></td>-->
 <!--						<td><span th:text="${p.description}"></span></td>-->
 						<td><div class="btn-group">
-								<a th:href="@{'/admin/product/edit/' + ${p.id}}" class="btn btn-success">Sửa</a> <a class="btn btn-danger"
-									th:href="@{'/admin/product/delete/' + ${p.id}}">Xóa</a>
+								<a th:href="@{'/admin/resident/edit/' + ${p.id}}" class="btn btn-success">Sửa</a> <a class="btn btn-danger"
+									th:href="@{'/admin/resident/delete/' + ${p.id}}">Xóa</a>
 							</div></td>
 					</tr>
 				</th:block>
@@ -95,3 +108,8 @@
 	<script th:src="@{/js/person.js}"></script>
 </body>
 </html>
+<style>
+	.thead-dark tr th , .table tbody tr td {
+		text-align: center;
+	}
+</style>

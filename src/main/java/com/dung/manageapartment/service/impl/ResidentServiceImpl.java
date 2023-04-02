@@ -22,8 +22,8 @@ public class ResidentServiceImpl implements ResidentService {
     private final ResidentRepository residentRepository;
     private final ModelMapper mapper;
     @Override
-    public List<ResidentDTO> getAll() {
-        return residentRepository.getAllByDeleted(false).stream().map(category -> mapper.map(category, ResidentDTO.class)).toList();
+    public List<Resident> getAll() {
+        return residentRepository.getAllByDeleted(false).stream().toList();
 
     }
     public ResidentDTO getByName(String name) {
@@ -31,36 +31,35 @@ public class ResidentServiceImpl implements ResidentService {
         return findByName.map(product -> mapper.map(product, ResidentDTO.class)).orElse(null);
     }
     @Override
-    public String add(ResidentDTO residentDTO, Model model) {
-        ResidentDTO getByName = getByName(residentDTO.getName());
-        residentRepository.save(mapper.map(residentDTO, Resident.class));
+    public String add(Resident resident, Model model) {
+        residentRepository.save(resident);
         return "redirect:/admin/resident";
     }
 
     @Override
-    public String edit(ResidentDTO residentDTO) {
-        ResidentDTO getById = getById(residentDTO.getId());
+    public String edit(Resident resident) {
+        Resident getById = getById(resident.getId());
         if (getById == null) {
             return "/admin/editProduct";
         }
-        residentRepository.save(mapper.map(getById, Resident.class).edit(residentDTO));
-        return "redirect:/admin/product";
+        residentRepository.save(resident);
+        return "redirect:/admin/resident";
     }
 
     @Override
-    public ResidentDTO getById(Long id) {
+    public Resident getById(Long id) {
         Optional<Resident> getId = residentRepository.findByIdAndDeletedFalse(id);
-        return mapper.map(getId, ResidentDTO.class);
+        return getId.get();
     }
 
     @Override
     public String delete(Long id) {
-        ResidentDTO getId = getById(id);
+        Resident getId = getById(id);
         if(getId != null){
             getId.setDeleted(true);
-            residentRepository.save(mapper.map(getId, Resident.class).delete());
+            residentRepository.save(getId).delete();
         }
-        return "redirect:/admin/apartment";
+        return "redirect:/admin/resident";
     }
 //
 //    @Override

@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Resident</title>
+    <style>
+        #myDIV {
+            width: 100%;
+            height: 300px;
+            background-color: #FFFFFF;
+            border: 5px solid;
+            border-style: dashed;
+        }
+        #myDIV2 {
+            width: 100%;
+            height: 300px;
+            background-color: #FFFFFF;
+            border: 5px solid;
+            border-style: dashed;
+        }
+    </style>
 </head>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -12,7 +28,7 @@
 <div th:replace="/admin/header :: header"></div>
 <div class="container text-center">
     <div>
-        <H1>
+        <H1 style="margin:40px 0 20px;">
             <b>Add Resident</b>
         </H1>
     </div>
@@ -22,121 +38,95 @@
         <div th:if="${err}">
             <p style="color : red; text-align: center" th:text="${err}"></p><br>
         </div>
-<!--        <div class="m-3">-->
-            <!------ Image 1 --------->
-<!--            <div class="form-group row">-->
-<!--                <label class="col-form-label col-sm-4" for="1">Ảnh 1:</label>-->
-<!--                <div class="col-sm-6">-->
-<!--                    <input accept="image/png,image/jpeg/webp" id="fileImage1" name="primaryImage" required-->
-<!--                           th:field="*{imageMain}" type="file"/>-->
-<!--                    <p><img alt="Image Preview" id="thumbnail1" style="height:200px; width:200px;display: none"></p>-->
-<!--                </div>-->
+
+
+        <div class="form-group row" >
+            <label  for="name" class="col-form-label col-sm-4">Name:</label>
+            <div class="col-sm-8">
+                <input th:field="*{name}" class="form-control" placeholder="Enter name" name="name">
+            </div>
+        </div>
+
+        <div class="form-group row" >
+            <label  for="email" class="col-form-label col-sm-4">Email:</label>
+            <div class="col-sm-8">
+                <input th:field="*{email}" class="form-control" placeholder="Enter erea" name="email">
+            </div>
+        </div>
+
+        <div class="form-group row" >
+            <label  for="phone" class="col-form-label col-sm-4">Phone:</label>
+            <div class="col-sm-8">
+                <input th:field="*{phone}" class="form-control" placeholder="Enter number of room" name="phone">
+            </div>
+        </div>
+
+        <div class="form-group row" >
+            <label  for="frontIdCard" class="col-form-label col-sm-4">Front ID Card:</label>
+            <!--<div class="col-sm-8">
+                <input accept="image/*" type="file"  class="form-control" placeholder="Upload front ID card" name="frontIdCard">
+            </div>-->
+            <div class=" col-sm-6">
+                <div class="mb-3">
+                    <input type="file" name="file1" accept="image/*" onchange="loadFile(event)"
+                    />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group row" >
+            <label  for="backIdCard" class="col-form-label col-sm-4">Back ID Card:</label>
+            <div class=" col-sm-6">
+                <div class="mb-3">
+                    <input type="file" name="file2" accept="image/*" onchange="loadFile(event)"
+                    />
+                </div>
+
+            </div>
+        </div>
+
+<!--        <div class="form-group row" >-->
+<!--            <label  for="idNumber" class="col-form-label col-sm-4">ID number:</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input th:field="*{idNumber}" class="form-control" placeholder="Enter number of room" name="idNumber">-->
 <!--            </div>-->
+<!--        </div>-->
 
-            <!------- Image 2 --------->
-<!--            <div class="form-group row">-->
-<!--                <label class="col-form-label col-sm-4" for="1">Ảnh 2:</label>-->
-<!--                <div class="col-sm-6">-->
-<!--                    <input accept="image/png,image/jpeg/webp" class="fileImage" id="fileImage2" name="img_sub1" required-->
-<!--                           th:field="*{imageHover}" type="file"/>-->
-<!--                    <p><img alt="Image Preview" id="thumbnail2" style="height:200px; width:200px;display: none"></p>-->
-<!--                </div>-->
-<!--            </div>-->
-
-            <!------- Image 3 --------->
-<!--            <div class="form-group row">-->
-<!--                <label class="col-form-label col-sm-4" for="1">Ảnh 3:</label>-->
-<!--                <div class="col-sm-6">-->
-<!--                    <input accept="image/png,image/jpeg/webp" class="fileImage" id="fileImage3" name="img_sub1" required-->
-<!--                           th:field="*{imageSub}" type="file"/>-->
-<!--                    <p><img alt="Image Preview" id="thumbnail3" style="height:200px; width:200px;display: none"></p>-->
-<!--                </div>-->
-<!--            </div>-->
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4" for="1">Name:</label>
-                <div class="col-sm-8">
-                    <input class="form-control mb-2 mr-sm-2" id="1"
-                           placeholder="Enter name" th:field="*{name}" type="text">
-                </div>
+        <div class="form-group row" >
+            <label  for="gender" class="col-form-label col-sm-4">gender:</label>
+            <div class="col-sm-8">
+                <input th:field="*{gender}" class="form-control" placeholder="Enter number of room" name="gender">
             </div>
+        </div>
 
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4" for="4">Apartment:</label>
-                <div class="col-sm-8">
-                    <select class="form-control" required th:field="*{id}">
-                        <th:block th:each="cate: ${listAparments}">
-                            <option th:text="${cate.name}" th:value="${cate.id}"></option>
-                        </th:block>
-                    </select>
-                </div>
+        <div class="form-group row" >
+            <label  for="dateOfBirth" class="col-form-label col-sm-4">Date of birth:</label>
+            <div class="col-sm-8">
+                <input type="date" th:field="*{dateOfBirth}" class="form-control" placeholder="yyyy-MM-dd" name="dateOfBirth">
             </div>
+        </div>
 
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4" for="1">Email:</label>
-                <div class="col-sm-8">
-                    <input class="form-control mb-2 mr-sm-2" id="6"
-                           placeholder="Enter email" th:field="*{email}" type="text">
-                </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-4">Apartment:</label>
+            <div class="col-sm-8">
+            <select style="height: 46px;border: 1px solid #ced4da;border-radius: 5px;" name="apartmentId"
+                    class="form-select col">
+                <option th:value=1>Chọn</option>
+                <option th:each="d : ${listApartments}" name = "apartmentId" th:value="${d.id}"
+                        th:text="${d.name}"></option>
+            </select>
+            <!--<p th:if="${select}==1">Vui lòng chọn Apartment</p>-->
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4" for="3">Phone number:</label>
-                <div class="col-sm-8">
-						<textarea class="form-control mb-2 mr-sm-2" id="8"
-                                  placeholder="Enter phone number" th:field="*{phone}" type="text"></textarea>
-                </div>
-            </div>
-
-<!--            <div class="form-group row">-->
-<!--                <label class="col-form-label col-sm-4" for="2">Price:</label>-->
-<!--                <div class="col-sm-8">-->
-<!--                    <input class="form-control mb-2 mr-sm-2" id="9" min="1" placeholder="Nhập giá phẩm"-->
-<!--                           step="any" th:field="*{price}" type="number">-->
-<!--                </div>-->
-<!--            </div>-->
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4" for="1">ID Number:</label>
-                <div class="col-sm-8">
-                    <input class="form-control mb-2 mr-sm-2" id="6"
-                           placeholder="Enter ID number" th:field="*{idNumber}" type="number">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4" for="1">Gender:</label>
-                <div class="col-sm-8">
-                    <input class="form-control mb-2 mr-sm-2" id="7"
-                           placeholder="Enter gender" th:field="*{gender}" type="text">
-                </div>
+        </div>
 
 
-                <div class="form-group row">
-                    <label class="col-form-label col-sm-4" for="1">DOB:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control mb-2 mr-sm-2" id="7"
-                               placeholder="Enter ID number" th:field="*{dateOfBirth}" type="datetime-local">
-                    </div>
-                </div>
-
-
-            </div>
-
-<!--            <div class="form-group row">-->
-<!--                <label class="col-form-label col-sm-4" for="1">Quantity:</label>-->
-<!--                <div class="col-sm-8">-->
-<!--                    <input class="form-control mb-2 mr-sm-2" id="9" min="1" placeholder="Nhập giá phẩm"-->
-<!--                           step="any" th:field="*{quantity}" type="number">-->
-<!--                </div>-->
-<!--            </div>-->
-
-            <div class="text-center p-3">
-                <button class="btn btn-primary mb-2" style="height: 38px;"
+            <div class="action text-center" style="margin:20px 0;">
+                <button class="btn btn-primary mb-2" style="height: 38px; width:100%;"
                         type="submit">Save
                 </button>
             </div>
-        </div>
     </form>
 </div>
 <div th:replace="/admin/footer :: footer"></div>
@@ -206,5 +196,27 @@
     }
 
 </script>
+<script>
+    var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+
+    var loadFile2 = function(event) {
+        var output = document.getElementById('output2');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+</script>
 </body>
 </html>
+<style>
+    .form-group .col-form-label {
+        text-align: left;
+    }
+</style>

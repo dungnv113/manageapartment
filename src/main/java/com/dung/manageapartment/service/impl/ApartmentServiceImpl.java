@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 @RequiredArgsConstructor
 public class ApartmentServiceImpl implements ApartmentService {
@@ -19,42 +21,42 @@ public class ApartmentServiceImpl implements ApartmentService {
     private final ModelMapper mapper;
 
     @Override
-    public List<ApartmentDTO> getAll() {
-        return apartmentRepository.getByDeleted(false).stream().map(apartment -> mapper.map(apartment, ApartmentDTO.class)).toList();
+    public List<Apartment> getAll() {
+        return apartmentRepository.getByDeleted(false).stream().toList();
     }
 
     @Override
-    public String add(ApartmentDTO apartmentDTO) {
-        apartmentRepository.save(mapper.map(apartmentDTO, Apartment.class));
+    public String add(Apartment apartment) {
+        apartmentRepository.save(apartment);
         return "redirect:/admin/apartment";
     }
 
     @Override
-    public ApartmentDTO getById(Long id) {
+    public Apartment getById(Long id) {
         Optional<Apartment> getId = apartmentRepository.findByIdAndDeletedFalse(id);
 //        if (getId == null) {
 //            return null;
 //        }
-        return mapper.map(getId.get(), ApartmentDTO.class);
+        return getId.get();
     }
 
     @Override
-    public String edit(ApartmentDTO apartmentDTO) {
-        ApartmentDTO getById = getById(apartmentDTO.getId());
+    public String edit(Apartment apartment) {
+        Apartment getById = getById(apartment.getId());
             if (getById == null) {
                 return "/admin/editApartment";
             }
-            apartmentRepository.save(mapper.map(getById, Apartment.class).edit(apartmentDTO));
+            apartmentRepository.save(getById);
             return "redirect:/admin/apartment";
     }
 
     @Override
     @Transactional
     public String delete(Long id) {
-        ApartmentDTO getId = getById(id);
+        Apartment getId = getById(id);
         if(getId != null){
             getId.setDeleted(true);
-            apartmentRepository.save(mapper.map(getId, Apartment.class).delete());
+            apartmentRepository.save(getId).delete();
         }
         return "redirect:/admin/apartment";
     }

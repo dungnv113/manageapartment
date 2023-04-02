@@ -24,6 +24,7 @@ public class UtilityServiceImpl implements UtilityService {
         return utilityRepository.getByDeleted(false).stream().map(utility -> mapper.map(utility, UtilityDTO.class)).toList();
     }
 
+    //
     @Override
     public String add(UtilityDTO utility) {
         utilityRepository.save(mapper.map(utility, Utility.class));

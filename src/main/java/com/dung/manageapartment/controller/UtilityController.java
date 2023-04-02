@@ -21,23 +21,25 @@ public class UtilityController {
 
     //show utility
     @GetMapping()
-    public String listUtility(Model model){
-    model.addAttribute("utility", utilityService.getAll());
-    return "/admin/utility";
+    public String listUtility(Model model) {
+        model.addAttribute("utility", utilityService.getAll());
+        return "/admin/utility";
     }
 
     //add utility
     @GetMapping("/add")
-    public String addUtility(Model model){
+    public String addUtility(Model model) {
         model.addAttribute("utility", new UtilityDTO());
         return "/admin/addUtility";
     }
 
     @PostMapping("/add")
-    public String addUtility(@Valid @ModelAttribute("utility") UtilityDTO dto, BindingResult result, Model model){
+    public String addUtility(@Valid @ModelAttribute("utility") UtilityDTO dto, BindingResult result, Model model) {
         return result.hasErrors() ? "admin/addUtility" : utilityService.add(dto);
     }
 
+
+    //update utility
     @GetMapping("/edit/{id}")
     public String update(@PathVariable(name = "id") Long id, Model model) {
         UtilityDTO getId = utilityService.getById(id);
@@ -53,8 +55,10 @@ public class UtilityController {
         return result.hasErrors() ? "edit/Apartment" : utilityService.edit(dto);
     }
 
+
+    //delete utility
     @GetMapping("/delete/{id}")
-    public String deleteApartment(@PathVariable("id") Long id, Model model){
+    public String deleteApartment(@PathVariable("id") Long id, Model model) {
         return utilityService.delete(id);
     }
 }

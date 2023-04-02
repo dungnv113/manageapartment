@@ -5,6 +5,7 @@ import com.dung.manageapartment.model.UtilityDTO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ import java.util.Set;
 @Table(name = "Utility")
 public class Utility {
     @ManyToMany(mappedBy = "utilities")
-    private Set<Bill> bills;
+    private List<Bill> bills;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
