@@ -14,5 +14,7 @@ public interface UtilityRepository extends JpaRepository<Utility, Long> {
 
     Optional<Utility> findByIdAndDeletedFalse(Long id);
 
+    List<Utility> findAll();
+
 
 }

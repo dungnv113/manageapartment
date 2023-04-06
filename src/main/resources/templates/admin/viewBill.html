@@ -29,8 +29,8 @@
 			<b>APARTMENT INFORMATION</b>
 		</h2>
 		<div style="display: flex; align-items: center;">
-			<form style="margin : 5px" th:action="@{/admin/apartment}">
-				<a class="btn btn-warning" th:href="@{/admin/apartment/add}">Add new apartment</b>
+			<form style="margin : 5px" th:action="@{/admin/bill}">
+				<a class="btn btn-warning" th:href="@{/admin/bill/add}">Create new bill</b>
 				</a>
 			</form>
 			<div class="box_search"></div>
@@ -42,24 +42,25 @@
 			<thead class="thead-dark">
 				<tr>
 					<th>Id</th>
-					<th>Area</th>
-					<th>Name</th>
-					<th>Number of room</th>
-					<th>Actions</th>
+					<th>Apartment</th>
+					<th>Month</th>
+					<th>Amout</th>
+<!--					<th>Actions</th>-->
 				</tr>
 			</thead>
 			<tbody>
-				<th:block th:each="b : ${apartments}">
+				<th:block th:each="b : ${utilities}">
 					<tr>
 						<td><span th:text="${b.id}"></span></td>
-						<td><a th:text="${b.area}"></a></td>
-						<td><span th:text="${b.name}"></span></td>
-						<td><span th:text="${b.num_rooms}"></span></td>
-						<td><div class="btn-group">
-								<a th:href="@{'/admin/apartment/edit/' + ${b.id}}" class="btn btn-success">Sửa</a> <a class="btn btn-danger"
+						<td><a th:text="${b.name}"></a></td>
+						<td><span th:text="${b.unitPrice}"></span></td>
+						<td><span th:text="0"></span></td>
+						<td><span th:text="0"></span></td>
+<!--						<td><div class="btn-group">-->
+<!--								<a th:href="@{'/admin/apartment/edit/' + ${b.id}}" class="btn btn-success">Sửa</a> <a class="btn btn-danger"-->
 
-									th:href="@{'/admin/apartment/delete/' + ${b.id}}">Xóa</a>
-							</div></td>
+<!--									th:href="@{'/admin/apartment/delete/' + ${b.id}}">Xóa</a>-->
+<!--							</div></td>-->
 					</tr>
 				</th:block>
 			</tbody>

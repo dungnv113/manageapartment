@@ -24,7 +24,7 @@ public class Resident {
     private String phone;
 
     private String gender;
-
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     private Date dateOfBirth;
 
     private String frontIdCard;

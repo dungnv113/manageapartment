@@ -26,11 +26,11 @@
 	<div th:replace="/admin/header :: header"></div>
 	<div class="container">
 			<h2>
-			<b> LIST OF RESIDENT </b>
+			<b> LIST OF UTILITY </b>
 		</h2>
 		<div style="display: flex; align-items: center;">
-			<form style="margin : 5px" th:action="@{/admin/resident}">
-			<a class="btn btn-warning" th:href="@{/admin/resident/add}">Add new resident</b>
+			<form style="margin : 5px" th:action="@{/admin/utility}">
+			<a class="btn btn-warning" th:href="@{/admin/utility/add}">Add new utility</b>
 			</a>
 		</form>
 			<div class="box_search"></div>
@@ -42,47 +42,23 @@
 			id="myTable">
 			<thead class="thead-dark">
 				<tr>
-					<th>Apartment</th>
+
 					<th>Id</th>
 					<th>Name</th>
-					<th>Email</th>
-					<th>Phone</th>
-					<th>Gender</th>
-					<th>FrontIdCard</th>
-					<th>BackIdCard</th>
-                    <th style="min-width: 133px;">Date of birth</th>
+					<th>Unit Price</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				<th:block th:each="p : ${residents}">
+				<th:block th:each="p : ${utility}">
 					<tr>
 
 						<td><span th:text="${p.id}"></span></td>
-						<td><a style="width: 100px; height: 120px;"
-							   th:text="${p.name}" alt="IMG-LOGO"></a></td>
-						<td><a style="width: 100px; height: 120px;"
-							   th:text="${p.email}" alt="IMG-LOGO"></a></td>
-						<td><a style="width: 100px; height: 120px;"
-							   th:text="${p.phone}" alt="IMG-LOGO"></a></td>
-<!--						<td><a th:text="${p.idNumber}"></a></td>-->
-						<td><a style="width: 100px; height: 120px;"
-							   th:text="${p.gender}" alt="IMG-LOGO"></a></td>
-						<td class="w3-center" style="justify-content: center; width: 20%;">
-							<img style="height: 80px; width: 100%; object-fit: cover;"
-								 th:src="@{'/admin/resident/download1?frontIdCard=' + ${p.frontIdCard}}"/>
-						</td>
-						<td class="w3-center" style="justify-content: center; width: 20%;">
-							<img style="height: 80px; width: 100%; object-fit: cover;"
-								 th:src="@{'/admin/resident/download2?backIdCard=' + ${p.backIdCard}}"/>
-						</td>
-						<td><a
-							   th:text="${#dates.format(p.dateOfBirth, 'yyyy-MM-dd')}" alt="IMG-LOGO"></a></td>
-<!--						<td><span th:text="${p.category.type}"></span></td>-->
-<!--						<td><span th:text="${p.description}"></span></td>-->
+						<td><span th:text="${p.name}"></span></td>
+						<td><span th:text="${p.unitPrice}"></span></td>
 						<td><div class="btn-group">
-								<a th:href="@{'/admin/resident/edit/' + ${p.id}}" class="btn btn-success">Sửa</a> <a class="btn btn-danger"
-									th:href="@{'/admin/resident/delete/' + ${p.id}}">Xóa</a>
+								<a th:href="@{'/admin/utility/edit/' + ${p.id}}" class="btn btn-success">Sửa</a> <a class="btn btn-danger"
+									th:href="@{'/admin/utility/delete/' + ${p.id}}">Xóa</a>
 							</div></td>
 					</tr>
 				</th:block>

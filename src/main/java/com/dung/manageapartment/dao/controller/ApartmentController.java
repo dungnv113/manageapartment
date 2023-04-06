@@ -1,4 +1,4 @@
-package com.dung.manageapartment.controller;
+package com.dung.manageapartment.dao.controller;
 
 import com.dung.manageapartment.entity.Apartment;
 import com.dung.manageapartment.model.ApartmentDTO;
@@ -54,7 +54,6 @@ public class ApartmentController {
     public String updatePost(@Valid @ModelAttribute("product") Apartment dto, BindingResult result, Model model) {
         return result.hasErrors() ? "edit/Apartment" : apartmentService.edit(dto);
     }
-
 
     //delete apartment
     @GetMapping("/delete/{id}")

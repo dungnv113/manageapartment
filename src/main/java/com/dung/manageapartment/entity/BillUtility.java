@@ -17,5 +17,6 @@ public class BillUtility {
     @JoinColumn(name = "utility_id")
     private Utility utility;
 
+    private int number;
     // Other fields and methods
 }

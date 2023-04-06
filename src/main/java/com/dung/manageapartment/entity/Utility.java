@@ -1,24 +1,21 @@
 package com.dung.manageapartment.entity;
 
-import com.dung.manageapartment.model.ApartmentDTO;
-import com.dung.manageapartment.model.UtilityDTO;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "Utility")
 public class Utility {
-    @ManyToMany(mappedBy = "utilities")
-    private List<Bill> bills;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @Column(name ="unit_price")
+    private Long unitPrice;
 
     @Column(name = "deleted", columnDefinition = "boolean default false")
     private Boolean deleted = false;
@@ -27,11 +24,15 @@ public class Utility {
     @Column(name = "name")
     private String name;
 
-    public Utility edit(UtilityDTO dto) {
+    public Utility edit(Utility dto) {
         if (Objects.nonNull(dto.getName())) {
             this.name = dto.getName();
         }
+        if (Objects.nonNull(dto.getUnitPrice())) {
+            this.unitPrice = dto.getUnitPrice();
+        }
 this.name = dto.getName();
+        this.unitPrice =dto.getUnitPrice();
         return this;
     }
 

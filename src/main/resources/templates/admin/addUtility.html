@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ADD Product</title>
+</head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<body>
+	<div th:replace="/admin/header :: header"></div>
+	<div class="container text-center">
+		<div>
+			<H1 style="margin:40px 0 20px;">
+				<b>Add Utility</b>
+			</H1>
+		</div>
+		<form style="max-width: 600px; margin: 0 auto;"
+			th:action="@{/admin/utility/add}" th:object="${utility}"
+			method="post" enctype="multipart/form-data">
+
+			<div class="form-group row" >
+									<label  for="name" class="col-form-label col-sm-4">Utility name:</label>
+									<div class="col-sm-8">
+										<input th:field="*{name}" class="form-control" placeholder="Enter name" name="name">
+									</div>
+								</div>
+
+			<div class="form-group row" >
+				<label  for="unitPrice" class="col-form-label col-sm-4">Unit Price:</label>
+				<div class="col-sm-8">
+					<input th:field="*{unitPrice}" class="form-control" placeholder="Enter unit price" name="unitPrice">
+				</div>
+			</div>
+
+
+			<div class="action text-center" style="margin:20px 0;">
+				<button class="btn btn-primary mb-2" style="height: 38px; width:100%;"
+						type="submit">Save
+				</button>
+			</div>
+		</form>
+	</div>
+	<div th:replace="/admin/footer :: footer"></div>
+
+</body>
+</html>
+<style>
+	.form-group .col-form-label {
+		text-align: left;
+	}
+</style>

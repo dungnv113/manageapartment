@@ -1,9 +1,8 @@
-package com.dung.manageapartment.controller;
+package com.dung.manageapartment.dao.controller;
 
 
 import com.dung.manageapartment.entity.Apartment;
 import com.dung.manageapartment.entity.Resident;
-import com.dung.manageapartment.model.ResidentDTO;
 import com.dung.manageapartment.service.ApartmentService;
 import com.dung.manageapartment.service.ResidentService;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +38,7 @@ public class ResidentController {
     @GetMapping()
     public String listResident(Model model) {
         model.addAttribute("residents", residentService.getAll());
-        model.addAttribute("products", apartmentService.getAll());
+        model.addAttribute("apartments", apartmentService.getAll());
         return "/admin/viewResident.html";
     }
 
@@ -109,8 +108,8 @@ public class ResidentController {
                 e.printStackTrace();
             }
         }
-        if (apartmentId == 1)
-            model.addAttribute("select", 1);
+//        if (apartmentId == 1)
+//            model.addAttribute("select", 1);
         return bindingResult.hasErrors() ? "/admin/addApartment" : residentService.add(resident, model);
 //        return "redirect:/admin/resident";
     }
@@ -160,10 +159,46 @@ public class ResidentController {
 
     //
     @PostMapping("/edit")
-    public String updatePost(@Valid @ModelAttribute("resident") Resident dto, BindingResult result, Model model) {
-        return result.hasErrors() ? "edit/Resident" : residentService.edit(dto);
-    }
+    public String updatePost(@Valid @ModelAttribute("resident") Resident resident, BindingResult result, Model model,
+                             @RequestParam(name = "file2", required = false) MultipartFile file2,
+                             @RequestParam(name = "file1", required = false) MultipartFile file1) {
+        if (file1 != null && file1.getSize() > 0) {
+            try {
+                final String folder = "E:/vmo/manageapartment/picture/upload";
+                String originFilename = file1.getOriginalFilename();
 
+                File newFile = new File(folder + "/" + originFilename);
+
+                // copy noi dung file upload vao file new
+                file1.transferTo(newFile);
+
+                // luu lai vao db
+                resident.setFrontIdCard(originFilename);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        if (file2 != null && file2.getSize() > 0) {
+            try {
+                final String folder = "E:/vmo/manageapartment/picture/upload";
+                String originFilename2 = file2.getOriginalFilename();
+
+                File newFile2 = new File(folder + "/" + originFilename2);
+
+                // copy noi dung file upload vao file new
+                file2.transferTo(newFile2);
+
+                // luu lai vao db
+                resident.setBackIdCard(originFilename2);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
+        return result.hasErrors() ? "edit/Resident" : residentService.edit(resident);
+    }
     //
 //
     //delete resident

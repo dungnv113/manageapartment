@@ -18,12 +18,14 @@ public class Bill {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private Resident resident;
+    @JoinColumn(name = "apartment_id",insertable = false, updatable = false)
+    private Apartment apartment;
 
+    @Column(name = "apartment_id")
+    private Long apartment_id;
 
-    @Column(name = "amount")
-    private BigDecimal amount;
+    @Column(name = "total")
+    private BigDecimal total;
 
     @Column(name ="month")
     private Date month;
@@ -32,8 +34,11 @@ public class Bill {
     @Column(name = "status")
     private BillStatus status;
     // Constructors, Getters, Setters
+    @Column(name = "deleted", columnDefinition = "boolean default false")
+    private Boolean deleted = false;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "bill_utility", joinColumns = @JoinColumn(name = "bill_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "utility_id", referencedColumnName = "id"))
-    private List<Utility> utilities;
+    public Bill delete() {
+        this.deleted = true;
+        return this;
+    }
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ADD Product</title>
+</head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<body>
+	<div th:replace="/admin/header :: header"></div>
+	<div class="container text-center">
+		<div>
+			<H1 style="margin:40px 0 20px;">
+				<b>Create new bill</b>
+			</H1>
+		</div>
+		<form style="max-width: 600px; margin: 0 auto;"
+			th:action="@{/admin/bill/add}" th:object="${bill}"
+			method="post" enctype="multipart/form-data">
+
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Apartment:</label>
+				<div class="col-sm-8">
+					<select style="height: 46px;border: 1px solid #ced4da;border-radius: 5px;" name="apartment_id"
+							class="form-select col">
+						<option >Chọn</option>
+						<option th:each="d : ${apartments}" name = "apartmentId" th:value="${d.id}"
+								th:text="${d.name}"></option>
+					</select>
+					<!--<p th:if="${select}==1">Vui lòng chọn Apartment</p>-->
+				</div>
+			</div>
+
+<!--			<div class="form-group row" >-->
+<!--				<label  for="month" class="col-form-label col-sm-4">Date:</label>-->
+<!--				<div class="col-sm-8">-->
+<!--					<input type="date" th:field="*{month}" class="form-control" placeholder="Enter month" name="month">-->
+<!--				</div>-->
+<!--			</div>-->
+
+			<div class="form-group row" th:each="d : ${utilities}">
+				<label name="utility" th:value="${d.id}" th:text="${d.name}" class="col-form-label col-sm-4"></label>
+				<div class="col-sm-8">
+					<input name="numbers" class="form-control" placeholder="Enter number" >
+				</div>
+
+			</div>
+
+
+			<div class="action text-center" style="margin:20px 0;">
+				<button class="btn btn-primary mb-2" style="height: 38px; width:100%;"
+						type="submit">Save
+				</button>
+			</div>
+		</form>
+	</div>
+	<div th:replace="/admin/footer :: footer"></div>
+
+<script>
+	const checkbox = document.getElementById("myCheckbox");
+	const input = document.getElementById("myInput");
+
+	checkbox.addEventListener("click", function() {
+		if (checkbox.checked) {
+			input.style.display = "block";
+		} else {
+			input.style.display = "none";
+		}
+	});
+
+</script>
+</body>
+</html>
+<style>
+	.form-group .col-form-label {
+		text-align: left;
+	}
+</style>
