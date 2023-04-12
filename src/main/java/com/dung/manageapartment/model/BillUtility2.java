@@ -1,12 +1,16 @@
 package com.dung.manageapartment.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "bill_utility2")
-@Data
+//@Data
+@Getter
+@Setter
 public class BillUtility2 {
 
     @Id
@@ -14,10 +18,10 @@ public class BillUtility2 {
     private Long id;
 
     @Column(name = "unit_price")
-    private Long unitPrice;
+    private long unitPrice;
 
     @Column(name = "quantity")
-    private int quantity;
+    private long quantity;
 
     @ManyToOne
     @JoinColumn(name = "utility_id")

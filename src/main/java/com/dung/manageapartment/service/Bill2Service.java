@@ -2,19 +2,36 @@ package com.dung.manageapartment.service;
 
 import com.dung.manageapartment.dto.Bill2DTO;
 import com.dung.manageapartment.dto.BillDTO;
+import com.dung.manageapartment.model.*;
+import com.dung.manageapartment.repository.UtilityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public interface Bill2Service {
-    void insert(Bill2DTO billDTO);
+@Service
+public class Bill2Service {
+    @Autowired
+    private UtilityRepository utilityRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    void update(Bill2DTO billDTO);
+    public Bill2 getBillById(Long billId) {
+        return entityManager.find(Bill2.class, billId);
+    }
 
-    void delete(Long id);
 
-    Bill2DTO get(Long id);
-
-    List<Bill2DTO> search(String findName, int start, int length);
-
-    List<Bill2DTO> searchByApartmentId(Long apartmentId, int start, int length);
+    public Bill2 calculateTotalAmount(Bill2 bill) {
+        List<BillUtility2> billUtilities = bill.getBillUtilities() ;
+        Long totalAmount = 0L;
+        for (BillUtility2 billUtility : billUtilities) {
+            Long utilityId = billUtility.getUtility().getId();
+            Utility utility = utilityRepository.getOne(utilityId);
+            totalAmount += utility.getUnitPrice();
+        }
+        bill.setPriceTotal(totalAmount);
+        return bill;
+    }
 }

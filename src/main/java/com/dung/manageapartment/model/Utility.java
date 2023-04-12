@@ -19,7 +19,7 @@ public class Utility {
     private Long id;
 
     @Column(name = "unit_price")
-    private Long unitPrice;
+    private long unitPrice;
 
     @Column(name = "deleted", columnDefinition = "boolean default false")
     private Boolean deleted = false;

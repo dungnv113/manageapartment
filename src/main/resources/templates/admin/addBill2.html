@@ -1,52 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 	<meta charset="UTF-8">
-	<title>Tạo Bill</title>
+	<title>ADD Product</title>
 </head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	  th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
-<h1>Tạo Bill</h1>
+<div th:replace="/admin/header :: header"></div>
+<div class="col-12 col-sm-9">
+	<div class="container mt-1">
+		<div class="row">
+			<h6>Create Bill</h6>
+		</div>
+		<hr />
+		<div class="row">
 
-<form method="post">
-	<table>
-		<tr>
-			<td>Mã căn hộ:</td>
-			<td><input type="text" name="apartmentCode"></td>
-		</tr>
-		<tr>
-			<td>Dịch vụ:</td>
-			<td>
-				<label><input type="checkbox" name="services" value="water"> Nước</label>
-				<label><input type="checkbox" name="services" value="electric"> Điện</label>
-				<label><input type="checkbox" name="services" value="internet"> Internet</label>
-			</td>
-		</tr>
-		<tr>
-			<td>Số lượng:</td>
-			<td>
-				<label><input type="number" name="quantity_water" min="0" max="99999"></label>
-				<label><input type="number" name="quantity_electric" min="0" max="99999"></label>
-				<label><input type="number" name="quantity_internet" min="0" max="99999"></label>
-			</td>
-		</tr>
-		<tr>
-			<td>Ngày sử dụng:</td>
-			<td><input type="date" name="usedDate"></td>
-		</tr>
-		<tr>
-			<td colspan="2"><button type="submit">Tính toán</button></td>
-		</tr>
-	</table>
-</form>
+			<form th:action="@{/admin/bill/add}" method="post">
+				<div class="mb-3">
+					<label class="form-label">Apartment:</label>
+					<select name="apartment.id" class="form-control">
+						<option  th:each="a: ${apartments}" th:value="${a.id}" th:text="${a.name}"></option>
+					</select>
+				</div>
 
-<div>
-	<h2>Kết quả:</h2>
-	<p>Mã căn hộ: <span ></span></p>
-	<p>Dịch vụ: <span ></span></p>
-	<p>Số lượng:</p>
-	<ul>
-		<li>Nước: <span ></span></li>
-		<li>Điện: <span ></span></li>
-		<li>Internet: <span ></span></li>
-	</ul>
-	<p>Ngày
+<!--				<div class="mb-3 mt-3">-->
+<!--					<label class="form-label">PriceTotal:</label>-->
+<!--					<input type="number" class="form-control" placeholder="Enter priceTotal" name="priceTotal">-->
+<!--				</div>-->
+
+			<div class="mb-3 mt-3">
+				<label class="form-label">Status:</label>
+				<input type="text" class="form-control" placeholder="Enter status" name="status">
+			</div>
+
+				<button type="submit" class="btn btn-primary">Create</button>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

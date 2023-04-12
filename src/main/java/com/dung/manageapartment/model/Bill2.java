@@ -1,6 +1,8 @@
 package com.dung.manageapartment.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,7 +10,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "bill2")
-@Data
+//@Data
+@Getter
+@Setter
 public class Bill2 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +32,8 @@ public class Bill2 {
     @Column(name = "status")
     private String status;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill")
+    @OneToMany(mappedBy = "bill")
     private List<BillUtility2> billUtilities;
 
-    @Column(name = "pay")
-    private String pay;
+
 }

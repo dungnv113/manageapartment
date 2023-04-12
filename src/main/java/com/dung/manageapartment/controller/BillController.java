@@ -48,20 +48,20 @@ public class BillController {
 //        return "/admin/viewbill";
 //    }
 
-//    @GetMapping("/detail")
-//    public String billDetail(Model model) {
-//        List<Object[]> results = billRepository.findAllBillsWithUtilities();
-//        model.addAttribute("all", results);
-//        return "/admin/billdetail";
-//    }
-    //add new
+    @GetMapping("/detail")
+    public String billDetail(Model model) {
+        List<Object[]> results = billRepository.findAllBillsWithUtilities();
+        model.addAttribute("all", results);
+        return "/admin/billdetail";
+    }
+//    add new
 
 
     @GetMapping("/add2")
     public String addBill(Model model) {
         model.addAttribute("bill", new Bill());
-        model.addAttribute("utilities", billService.getUtility());
-        model.addAttribute("billutilities", billUtilityService.getBillUtility());
+//        model.addAttribute("utilities", billService.getUtility());
+//        model.addAttribute("billutilities", billUtilityService.getBillUtility());
         model.addAttribute("apartments", apartmentService.getAll());
         return "/admin/addbill";
     }
@@ -85,33 +85,33 @@ public class BillController {
         billUtility.setUtility(utility);
         billUtilityRepository.save(billUtility);
 
-        return "/admin/addbill" ;
+        return "/admin/viewbill" ;
     }
-
-    @PostMapping("/add")
-    public String create(@ModelAttribute Bill bill, BindingResult bindingResult) {
-
-        if(bindingResult.hasErrors()) {
-            return "/admin/addbill";
-        }
-        billRepository.save(bill);
-
-        return "redirect/viewbill";
-    }
-    @GetMapping("/edit/{id}")
-    public String editBill(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("bill", billService.getById(id));
-        return "/admin/editbill";
-    }
-
-
-    @PostMapping("/edit")
-    public String editBill(@Valid @ModelAttribute("bill") Bill bill, BindingResult result, Model model) {
-        return result.hasErrors() ? "edit/bill" : billService.edit(bill);
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteBill(@PathVariable("id") Long id, Model model) {
-        return billService.delete(id);
-    }
+//
+//    @PostMapping("/add")
+//    public String create(@ModelAttribute Bill bill, BindingResult bindingResult) {
+//
+//        if(bindingResult.hasErrors()) {
+//            return "/admin/addbill";
+//        }
+//        billRepository.save(bill);
+//
+//        return "redirect/viewbill";
+//    }
+//    @GetMapping("/edit/{id}")
+//    public String editBill(@PathVariable("id") Long id, Model model) {
+//        model.addAttribute("bill", billService.getById(id));
+//        return "/admin/editbill";
+//    }
+//
+//
+//    @PostMapping("/edit")
+//    public String editBill(@Valid @ModelAttribute("bill") Bill bill, BindingResult result, Model model) {
+//        return result.hasErrors() ? "edit/bill" : billService.edit(bill);
+//    }
+//
+//    @GetMapping("/delete/{id}")
+//    public String deleteBill(@PathVariable("id") Long id, Model model) {
+//        return billService.delete(id);
+//    }
 }

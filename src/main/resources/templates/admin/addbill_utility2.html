@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ADD Product</title>
+</head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<body>
+	<div th:replace="/admin/header :: header"></div>
+	<div class="container mt-1">
+		<div class="row">
+			<h6>Create BillItems</h6>
+		</div>
+		<hr />
+		<div class="row">
+
+			<form th:action="@{/admin/bill-utility/add}" method="post">
+
+				<div class="mb-3 mt-3">
+					<label class="form-label">Quantity:</label>
+					<input type="text" class="form-control" placeholder="Enter quantity" name="quantity">
+				</div>
+
+<!--				<div class="mb-3 mt-3">-->
+<!--					<label class="form-label">UnitPrice:</label>-->
+<!--					<input type="number" class="form-control" placeholder="Enter unitPrice" name="unitPrice">-->
+<!--				</div>-->
+
+				<div class="mb-3">
+					<label class="form-label">Bill:</label>
+					<select name="bill.id" class="form-control">
+						<option  th:each="b : ${bills}" th:value="${b.id}" th:text="${b.id + ' - ' + b.apartment.name}"></option>
+					</select>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label">Utility:</label>
+					<select name="utility.id" class="form-control">
+						<option th:each="u : ${utilities}" th:value="${u.id}" th:text="${u.name}"></option>
+					</select>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Create</button>
+			</form>
+		</div>
+	</div>
+	</div>
+
+	<div th:replace="/admin/footer :: footer"></div>
+
+<script>
+	const checkbox = document.getElementById("myCheckbox");
+	const input = document.getElementById("myInput");
+
+	checkbox.addEventListener("click", function() {
+		if (checkbox.checked) {
+			input.style.display = "block";
+		} else {
+			input.style.display = "none";
+		}
+	});
+
+</script>
+</body>
+</html>
+<style>
+	.form-group .col-form-label {
+		text-align: left;
+	}
+</style>

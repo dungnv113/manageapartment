@@ -26,7 +26,7 @@
 	<div th:replace="/admin/header :: header"></div>
 	<div class="container">
 		<h2>
-			<b>APARTMENT INFORMATION</b>
+			<b>CHI TIET</b>
 		</h2>
 		<div style="display: flex; align-items: center;">
 			<form style="margin : 5px" th:action="@{/admin/bill}">
@@ -42,9 +42,12 @@
 			<thead class="thead-dark">
 				<tr>
 					<th>Id</th>
+					<th>Bill_id</th>
 					<th>Apartment</th>
-					<th>PriceTotal</th>
-					<th>Status</th>
+					<th>Utility_name</th>
+					<th>Utility_unitprice</th>
+					<th>Quantity</th>
+					<th>UnitPrice</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -52,14 +55,14 @@
 				<th:block th:each="b : ${all}">
 					<tr>
 						<td><span th:text="${b.id}"></span></td>
-						<td><a th:text="${b.apartment.name}"></a></td>
-<!--						<td><span th:text="${b.priceTotal}"></span></td>-->
-						<td><span th:each="utility : ${b.billUtilities}">
-							<span th:text="${utility.unitPrice}"></span>
-						</span></td>
-						<td><span th:text="${b.status}"></span></td>
+						<td><a th:text="${b.bill.id}"></a></td>
+						<td><a th:text="${b.bill.apartment.name}"></a></td>
+						<td><span th:text="${b.utility.name}"></span></td>
+						<td><span th:text="${b.utility.unitPrice}"></span></td>
+						<td><span th:text="${b.quantity}"></span></td>
+						<td><span th:text="${b.unitPrice}"></span></td>
 						<td><div class="btn-group">
-								<a th:href="@{'/admin/bill/chi-tiet?billId=' + ${b.id}}" class="btn btn-success">Chi tiết</a>
+								<a th:href="@{'/admin/apartment/edit/' + ${b.id}}" class="btn btn-success">Edit</a>
 
 <!--									th:href="@{'/admin/apartment/delete/' + ${b.id}}">Xóa</a>-->
 							</div></td>
@@ -87,6 +90,8 @@
 			$("#myTable_filter").appendTo(".box_search");
 		} );
 	</script>
+
+
 
 </body>
 </html>

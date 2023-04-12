@@ -26,13 +26,13 @@
 	<div th:replace="/admin/header :: header"></div>
 	<div class="container">
 		<h2>
-			<b>APARTMENT INFORMATION</b>
+			<b>CHI TIET</b>
 		</h2>
 		<div style="display: flex; align-items: center;">
-			<form style="margin : 5px" th:action="@{/admin/bill}">
-				<a class="btn btn-warning" th:href="@{/admin/bill/add}">Create new bill</b>
+<!--			<form style="margin : 5px" th:action="@{/admin/bill}">-->
+				<a class="btn btn-warning" th:href="@{/admin/bill-utility/add}">Create new bill-utility</b>
 				</a>
-			</form>
+<!--			</form>-->
 			<div class="box_search"></div>
 		</div>
 
@@ -42,24 +42,27 @@
 			<thead class="thead-dark">
 				<tr>
 					<th>Id</th>
+					<th>Bill_id</th>
 					<th>Apartment</th>
-					<th>PriceTotal</th>
-					<th>Status</th>
+					<th>Utility_name</th>
+					<th>Utility_unitprice</th>
+					<th>Quantity</th>
+					<th>UnitPrice</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				<th:block th:each="b : ${all}">
+				<th:block th:each="b : ${bill_utilities}">
 					<tr>
 						<td><span th:text="${b.id}"></span></td>
-						<td><a th:text="${b.apartment.name}"></a></td>
-<!--						<td><span th:text="${b.priceTotal}"></span></td>-->
-						<td><span th:each="utility : ${b.billUtilities}">
-							<span th:text="${utility.unitPrice}"></span>
-						</span></td>
-						<td><span th:text="${b.status}"></span></td>
+						<td><a th:text="${b.bill.id}"></a></td>
+						<td><a th:text="${b.bill.apartment.name}"></a></td>
+						<td><span th:text="${b.utility.name}"></span></td>
+						<td><span th:text="${b.utility.unitPrice}"></span></td>
+						<td><span th:text="${b.quantity}"></span></td>
+						<td><span th:text="${b.unitPrice}"></span></td>
 						<td><div class="btn-group">
-								<a th:href="@{'/admin/bill/chi-tiet?billId=' + ${b.id}}" class="btn btn-success">Chi tiết</a>
+								<a th:href="@{'/admin/apartment/edit/' + ${b.id}}" class="btn btn-success">Edit</a>
 
 <!--									th:href="@{'/admin/apartment/delete/' + ${b.id}}">Xóa</a>-->
 							</div></td>
@@ -67,6 +70,7 @@
 				</th:block>
 			</tbody>
 		</table>
+
 
 	</div>
 	<div th:replace="/admin/footer :: footer"></div>
@@ -87,6 +91,26 @@
 			$("#myTable_filter").appendTo(".box_search");
 		} );
 	</script>
+
+<!--	<div class="row undertable col-12 col-sm-3 col-md-3">-->
+<!--		<div class="row">-->
+<!--			<ul class="pagination">-->
+
+<!--				<li th:if="${totalPage > 0}" class="page-item">-->
+<!--					<a class="page-link" th:href="@{'/admin/bill/chi-tiet?page='+ ${page - 1 < 0 ? 0 : (page - 1)} + '&billId=' + ${billId} }">Previous</a>-->
+<!--				</li>-->
+
+<!--				<li th:if="${totalPage > 0}" th:each="i: ${#numbers.sequence(0, totalPage - 1)}" class="page-item">-->
+<!--					<a class="page-link" th:href="@{'/admin/bill/chi-tiet?page='+ ${i} + '&billId=' + ${billId} }" th:text="${i}"></a>-->
+<!--				</li>-->
+
+<!--				<li th:if="${totalPage > 0}" class="page-item">-->
+<!--					<a class="page-link" th:href="@{'/admin/bill/chi-tiet?page='+ ${page + 1 >= totalPage ? (totalPage - 1) : (page + 1) } + '&billId=' + ${billId} }">Next</a>-->
+<!--				</li>-->
+
+<!--			</ul>-->
+<!--		</div>-->
+<!--	</div>-->
 
 </body>
 </html>
