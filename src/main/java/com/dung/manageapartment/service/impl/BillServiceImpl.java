@@ -1,7 +1,7 @@
 package com.dung.manageapartment.service.impl;
 
-import com.dung.manageapartment.entity.Bill;
-import com.dung.manageapartment.entity.Utility;
+import com.dung.manageapartment.model.Bill;
+import com.dung.manageapartment.model.Utility;
 import com.dung.manageapartment.repository.BillRepository;
 import com.dung.manageapartment.repository.UtilityRepository;
 import com.dung.manageapartment.service.BillService;
@@ -57,6 +57,6 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public List<Utility> getUtility() {
-        return utilityRepository.findAll().stream().toList();
+        return utilityRepository.getByDeleted(false).stream().toList();
     }
 }

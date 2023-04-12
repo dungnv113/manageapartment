@@ -1,8 +1,8 @@
-package com.dung.manageapartment.dao.controller;
+package com.dung.manageapartment.controller;
 
 
-import com.dung.manageapartment.entity.Apartment;
-import com.dung.manageapartment.entity.Resident;
+import com.dung.manageapartment.model.Apartment;
+import com.dung.manageapartment.model.Resident;
 import com.dung.manageapartment.service.ApartmentService;
 import com.dung.manageapartment.service.ResidentService;
 import lombok.RequiredArgsConstructor;
@@ -161,7 +161,8 @@ public class ResidentController {
     @PostMapping("/edit")
     public String updatePost(@Valid @ModelAttribute("resident") Resident resident, BindingResult result, Model model,
                              @RequestParam(name = "file2", required = false) MultipartFile file2,
-                             @RequestParam(name = "file1", required = false) MultipartFile file1) {
+                             @RequestParam(name = "file1", required = false) MultipartFile file1,
+                             @RequestParam("dateOfBirth") String dateOfBirth) {
         if (file1 != null && file1.getSize() > 0) {
             try {
                 final String folder = "E:/vmo/manageapartment/picture/upload";
@@ -196,6 +197,12 @@ public class ResidentController {
                 e.printStackTrace();
             }
 
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            resident.setDateOfBirth(dateFormat.parse(dateOfBirth));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return result.hasErrors() ? "edit/Resident" : residentService.edit(resident);
     }

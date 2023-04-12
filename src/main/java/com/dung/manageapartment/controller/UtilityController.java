@@ -1,9 +1,7 @@
-package com.dung.manageapartment.dao.controller;
+package com.dung.manageapartment.controller;
 
 
-import com.dung.manageapartment.entity.Utility;
-import com.dung.manageapartment.model.ApartmentDTO;
-import com.dung.manageapartment.model.UtilityDTO;
+import com.dung.manageapartment.model.Utility;
 import com.dung.manageapartment.service.UtilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

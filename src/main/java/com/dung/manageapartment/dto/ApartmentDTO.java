@@ -1,15 +1,14 @@
-package com.dung.manageapartment.model;
+package com.dung.manageapartment.dto;
 
-import com.dung.manageapartment.entity.Apartment;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Primary;
-@Data
+import com.dung.manageapartment.model.Apartment;
+import lombok.*;
+
+//@Data k để nhưu này
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Setter
+@Getter
 public class ApartmentDTO {
 
     private Long id;

@@ -1,7 +1,6 @@
 package com.dung.manageapartment.service;
 
-import com.dung.manageapartment.entity.Resident;
-import com.dung.manageapartment.model.ResidentDTO;
+import com.dung.manageapartment.model.Resident;
 import org.springframework.ui.Model;
 
 import java.util.List;

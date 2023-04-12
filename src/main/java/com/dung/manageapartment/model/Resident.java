@@ -1,12 +1,10 @@
-package com.dung.manageapartment.entity;
+package com.dung.manageapartment.model;
 
-import com.dung.manageapartment.model.ResidentDTO;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Data

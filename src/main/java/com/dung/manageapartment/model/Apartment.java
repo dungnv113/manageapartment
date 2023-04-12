@@ -1,11 +1,7 @@
-package com.dung.manageapartment.entity;
+package com.dung.manageapartment.model;
 
-import com.dung.manageapartment.entity.Resident;
-import com.dung.manageapartment.model.ApartmentDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.dung.manageapartment.dto.ApartmentDTO;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +9,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Data
+//@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 @Table(name = "apartment")
 public class Apartment {
 
@@ -31,6 +31,9 @@ public class Apartment {
 
     @OneToMany(mappedBy = "apartment", cascade = CascadeType.ALL)
     private List<Resident> residents = new ArrayList<>();
+
+    public Apartment(Long id) {
+    }
 
     public Apartment edit(ApartmentDTO dto) {
         if (Objects.nonNull(dto.getArea())) {
@@ -53,6 +56,5 @@ public class Apartment {
         this.deleted = true;
         return this;
     }
-
 
 }

@@ -1,6 +1,6 @@
 package com.dung.manageapartment.repository;
 
-import com.dung.manageapartment.entity.Resident;
+import com.dung.manageapartment.model.Resident;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

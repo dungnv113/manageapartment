@@ -1,12 +1,16 @@
-package com.dung.manageapartment.entity;
+package com.dung.manageapartment.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Data
+//@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 @Table(name = "Utility")
 public class Utility {
     @Id
@@ -14,7 +18,7 @@ public class Utility {
     @Column(name = "id")
     private Long id;
 
-    @Column(name ="unit_price")
+    @Column(name = "unit_price")
     private Long unitPrice;
 
     @Column(name = "deleted", columnDefinition = "boolean default false")
@@ -25,14 +29,14 @@ public class Utility {
     private String name;
 
     public Utility edit(Utility dto) {
-        if (Objects.nonNull(dto.getName())) {
+        if (Objects.nonNull(dto.getName())) { // hmm
             this.name = dto.getName();
         }
         if (Objects.nonNull(dto.getUnitPrice())) {
-            this.unitPrice = dto.getUnitPrice();
+            this.unitPrice = dto.getUnitPrice(); //?
         }
-this.name = dto.getName();
-        this.unitPrice =dto.getUnitPrice();
+        this.name = dto.getName();
+        this.unitPrice = dto.getUnitPrice();
         return this;
     }
 

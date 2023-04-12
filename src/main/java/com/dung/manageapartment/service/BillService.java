@@ -1,7 +1,9 @@
 package com.dung.manageapartment.service;
 
-import com.dung.manageapartment.entity.Bill;
-import com.dung.manageapartment.entity.Utility;
+import com.dung.manageapartment.dto.BillDTO;
+import com.dung.manageapartment.model.Bill;
+import com.dung.manageapartment.model.BillUtility;
+import com.dung.manageapartment.model.Utility;
 
 import java.util.List;
 

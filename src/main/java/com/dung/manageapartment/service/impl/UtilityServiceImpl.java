@@ -1,7 +1,6 @@
 package com.dung.manageapartment.service.impl;
 
-import com.dung.manageapartment.entity.Utility;
-import com.dung.manageapartment.model.UtilityDTO;
+import com.dung.manageapartment.model.Utility;
 import com.dung.manageapartment.repository.UtilityRepository;
 import com.dung.manageapartment.service.UtilityService;
 import lombok.RequiredArgsConstructor;

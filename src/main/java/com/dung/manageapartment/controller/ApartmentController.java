@@ -1,8 +1,9 @@
-package com.dung.manageapartment.dao.controller;
+package com.dung.manageapartment.controller;
 
-import com.dung.manageapartment.entity.Apartment;
-import com.dung.manageapartment.model.ApartmentDTO;
+import com.dung.manageapartment.model.Apartment;
 import com.dung.manageapartment.service.ApartmentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +15,13 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/admin/apartment")
 @RequiredArgsConstructor
+@Api(value=" Management System", description="Operations pertaining to user management in the  Management System")
 public class ApartmentController {
     private final ApartmentService apartmentService;
 
     //show apartment
     @GetMapping()
+    @ApiOperation(value="View a list of available apartment", response=String.class)
     public String listApartment(Model model){
         model.addAttribute("apartments",apartmentService.getAll());
         return "/admin/view.html";

@@ -1,6 +1,6 @@
 package com.dung.manageapartment.repository;
 
-import com.dung.manageapartment.entity.Utility;
+import com.dung.manageapartment.model.Utility;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +13,10 @@ public interface UtilityRepository extends JpaRepository<Utility, Long> {
     List<Utility> getByDeleted(Boolean deleted);
 
     Optional<Utility> findByIdAndDeletedFalse(Long id);
+
+
+    @Override
+    Optional<Utility> findById(Long aLong);
 
     List<Utility> findAll();
 

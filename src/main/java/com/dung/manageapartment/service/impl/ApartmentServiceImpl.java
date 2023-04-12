@@ -1,7 +1,6 @@
 package com.dung.manageapartment.service.impl;
 
-import com.dung.manageapartment.entity.Apartment;
-import com.dung.manageapartment.model.ApartmentDTO;
+import com.dung.manageapartment.model.Apartment;
 import com.dung.manageapartment.repository.ApartmentRepository;
 import com.dung.manageapartment.service.ApartmentService;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +38,7 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
-    public String edit(Apartment apartment) {
+    public String edit(Apartment apartment) { // có dto mà sao lại dùng luôn entity
         Apartment getById = getById(apartment.getId());
             if (getById == null) {
                 return "/admin/editApartment";

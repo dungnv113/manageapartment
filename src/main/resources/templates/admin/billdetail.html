@@ -41,26 +41,26 @@
 			id="myTable">
 			<thead class="thead-dark">
 				<tr>
-					<th>Id</th>
 					<th>Apartment</th>
-					<th>Month</th>
+					<th>Utility</th>
+					<th>Unit Price</th>
+					<th>Number</th>
 					<th>Amout</th>
-<!--					<th>Actions</th>-->
 				</tr>
 			</thead>
 			<tbody>
-				<th:block th:each="b : ${utilities}">
+				<th:block th:each="billDetail  : ${all}">
 					<tr>
-						<td><span th:text="${b.id}"></span></td>
-						<td><a th:text="${b.name}"></a></td>
-						<td><span th:text="${b.unitPrice}"></span></td>
-						<td><span th:text="0"></span></td>
-						<td><span th:text="0"></span></td>
-<!--						<td><div class="btn-group">-->
-<!--								<a th:href="@{'/admin/apartment/edit/' + ${b.id}}" class="btn btn-success">Sửa</a> <a class="btn btn-danger"-->
+						<td th:text="${billDetail[0]}"></td>
+						<td th:text="${billDetail[1]}"></td>
+						<td th:text="${billDetail[2]}"></td>
+						<td th:text="${billDetail[3]}"></td>
+						<td th:text="${billDetail[4]}"></td>
+						<td><div class="btn-group">
+<!--								<a th:href="@{'/admin/apartment/edit/' + ${b.id}}" class="btn btn-success">Chi tiết</a> -->
 
 <!--									th:href="@{'/admin/apartment/delete/' + ${b.id}}">Xóa</a>-->
-<!--							</div></td>-->
+							</div></td>
 					</tr>
 				</th:block>
 			</tbody>

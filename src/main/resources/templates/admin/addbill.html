@@ -18,12 +18,12 @@
 		</div>
 		<form style="max-width: 600px; margin: 0 auto;"
 			th:action="@{/admin/bill/add}" th:object="${bill}"
-			method="post" enctype="multipart/form-data">
+			method="post" >
 
 			<div class="form-group row">
 				<label class="col-form-label col-sm-4">Apartment:</label>
 				<div class="col-sm-8">
-					<select style="height: 46px;border: 1px solid #ced4da;border-radius: 5px;" name="apartment_id"
+					<select style="height: 46px;border: 1px solid #ced4da;border-radius: 5px;" name="apartmentId"
 							class="form-select col">
 						<option >Chọn</option>
 						<option th:each="d : ${apartments}" name = "apartmentId" th:value="${d.id}"
@@ -39,13 +39,24 @@
 <!--					<input type="date" th:field="*{month}" class="form-control" placeholder="Enter month" name="month">-->
 <!--				</div>-->
 <!--			</div>-->
-
-			<div class="form-group row" th:each="d : ${utilities}">
-				<label name="utility" th:value="${d.id}" th:text="${d.name}" class="col-form-label col-sm-4"></label>
+			<div class="form-group row">
+				<label class="col-form-label col-sm-4">Utility:</label>
 				<div class="col-sm-8">
-					<input name="numbers" class="form-control" placeholder="Enter number" >
+					<select style="height: 46px;border: 1px solid #ced4da;border-radius: 5px;" name="utilityId"
+							class="form-select col">
+						<option >Chọn</option>
+						<option th:each="d : ${utilities}" name = "utilityId" th:value="${d.id}"
+								th:text="${d.name}"></option>
+					</select>
+					<!--<p th:if="${select}==1">Vui lòng chọn Apartment</p>-->
 				</div>
+			</div>
 
+			<div class="form-group row" >
+				<label  for="number" class="col-form-label col-sm-4">Number of Usage:</label>
+				<div class="col-sm-8">
+					<input th:field="*{number}" class="form-control" placeholder="Enter number of usage" name="number">
+				</div>
 			</div>
 
 

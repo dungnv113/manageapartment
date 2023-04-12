@@ -1,12 +1,10 @@
-package com.dung.manageapartment.model;
+package com.dung.manageapartment.dto;
 
-import com.dung.manageapartment.entity.Apartment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 import java.util.List;
 

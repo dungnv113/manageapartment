@@ -1,15 +1,19 @@
-package com.dung.manageapartment.entity;
+package com.dung.manageapartment.model;
 
 import com.dung.manageapartment.constant.BillStatus;
 import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Data
+@Setter
+@Getter
+@RequiredArgsConstructor
 @Table(name = "bill")
 public class Bill {
     @Id
@@ -21,8 +25,8 @@ public class Bill {
     @JoinColumn(name = "apartment_id",insertable = false, updatable = false)
     private Apartment apartment;
 
-    @Column(name = "apartment_id")
-    private Long apartment_id;
+//    @Column(name = "apartment_id")
+//    private Long apartmentId;
 
     @Column(name = "total")
     private BigDecimal total;
@@ -37,8 +41,18 @@ public class Bill {
     @Column(name = "deleted", columnDefinition = "boolean default false")
     private Boolean deleted = false;
 
+//    public Bill(int number, Long apartmentid) {
+//        this.number = number;
+//        this.apartmentId = apartmentid;
+//    }
+
+
     public Bill delete() {
-        this.deleted = true;
+        this.deleted = true; //?
         return this;
     }
-}
+    @Column(name ="number")
+    private int number;
+
+    }
+

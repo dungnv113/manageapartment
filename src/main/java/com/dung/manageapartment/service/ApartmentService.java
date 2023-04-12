@@ -1,7 +1,6 @@
 package com.dung.manageapartment.service;
 
-import com.dung.manageapartment.entity.Apartment;
-import com.dung.manageapartment.model.ApartmentDTO;
+import com.dung.manageapartment.model.Apartment;
 
 import java.util.List;
 

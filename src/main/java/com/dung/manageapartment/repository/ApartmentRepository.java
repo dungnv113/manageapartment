@@ -1,6 +1,6 @@
 package com.dung.manageapartment.repository;
 
-import com.dung.manageapartment.entity.Apartment;
+import com.dung.manageapartment.model.Apartment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

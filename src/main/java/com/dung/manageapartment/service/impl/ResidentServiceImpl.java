@@ -1,9 +1,7 @@
 package com.dung.manageapartment.service.impl;
 
-import com.dung.manageapartment.entity.Apartment;
-import com.dung.manageapartment.entity.Resident;
-import com.dung.manageapartment.model.ApartmentDTO;
-import com.dung.manageapartment.model.ResidentDTO;
+import com.dung.manageapartment.model.Resident;
+import com.dung.manageapartment.dto.ResidentDTO;
 import com.dung.manageapartment.repository.ResidentRepository;
 import com.dung.manageapartment.service.ResidentService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Optional;
 

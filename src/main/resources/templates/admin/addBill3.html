@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Create Bill</title>
+</head>
+<body>
+<h1>Create Bill</h1>
+<form action="#" th:action="@{/bills}" method="post">
+	<div>
+		<label for="apartment">Chọn căn hộ:</label>
+		<select id="apartment" name="apartmentId">
+			<option value="">-- Chọn căn hộ --</option>
+			<option th:each="apt : ${apartments}" th:value="${apt.id}" th:text="${apt.name}"></option>
+		</select>
+	</div>
+
+	<label for="usage_date">Usage Date:</label>
+	<input type="date" id="usage_date" name="usage_date"><br><br>
+
+	<h2>Services:</h2>
+	<table>
+		<thead>
+		<tr>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Quantity</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="service : ${utilities}" th:value="${service.id}">
+			<td th:text="${service.name}"></td>
+			<td th:text="${service.unitPrice}"></td>
+			<td>
+				<input type="number" min="0">
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<br>
+	<button type="submit">Create</button>
+</form>
+</body>
+</html>

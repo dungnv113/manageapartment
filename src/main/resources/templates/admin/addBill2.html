@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Tạo Bill</title>
+</head>
+<body>
+<h1>Tạo Bill</h1>
+
+<form method="post">
+	<table>
+		<tr>
+			<td>Mã căn hộ:</td>
+			<td><input type="text" name="apartmentCode"></td>
+		</tr>
+		<tr>
+			<td>Dịch vụ:</td>
+			<td>
+				<label><input type="checkbox" name="services" value="water"> Nước</label>
+				<label><input type="checkbox" name="services" value="electric"> Điện</label>
+				<label><input type="checkbox" name="services" value="internet"> Internet</label>
+			</td>
+		</tr>
+		<tr>
+			<td>Số lượng:</td>
+			<td>
+				<label><input type="number" name="quantity_water" min="0" max="99999"></label>
+				<label><input type="number" name="quantity_electric" min="0" max="99999"></label>
+				<label><input type="number" name="quantity_internet" min="0" max="99999"></label>
+			</td>
+		</tr>
+		<tr>
+			<td>Ngày sử dụng:</td>
+			<td><input type="date" name="usedDate"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><button type="submit">Tính toán</button></td>
+		</tr>
+	</table>
+</form>
+
+<div>
+	<h2>Kết quả:</h2>
+	<p>Mã căn hộ: <span ></span></p>
+	<p>Dịch vụ: <span ></span></p>
+	<p>Số lượng:</p>
+	<ul>
+		<li>Nước: <span ></span></li>
+		<li>Điện: <span ></span></li>
+		<li>Internet: <span ></span></li>
+	</ul>
+	<p>Ngày
