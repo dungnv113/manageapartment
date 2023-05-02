@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -35,5 +36,14 @@ public class Bill2 {
     @OneToMany(mappedBy = "bill")
     private List<BillUtility2> billUtilities;
 
-
+    public Long totalUtilityPrice() {
+        Long total = Long.valueOf(0);
+        for (BillUtility2 billUtility : billUtilities) {
+            Long utilityPrice = billUtility.getUtility().getUnitPrice();
+            Long quantity = billUtility.getQuantity();
+            Long utilityTotal = utilityPrice*quantity;
+            total = utilityTotal;
+        }
+        return total;
+    }
 }

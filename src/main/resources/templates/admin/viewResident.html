@@ -42,9 +42,8 @@
 			id="myTable">
 			<thead class="thead-dark">
 				<tr>
-					<th>Apartment</th>
-					<th>Id</th>
 					<th>Name</th>
+					<th>Apartment</th>
 					<th>Email</th>
 					<th>Phone</th>
 					<th>Gender</th>
@@ -57,10 +56,10 @@
 			<tbody>
 				<th:block th:each="p : ${residents}">
 					<tr>
-						<td><span th:text="0"></span></td>
-						<td><span th:text="${p.id}"></span></td>
 						<td><a style="width: 100px; height: 120px;"
-							   th:text="${p.name}" alt="IMG-LOGO"></a></td>
+							   th:text="${p.name}" ></a></td>
+						<td><a style="width: 100px; height: 120px;"
+							   th:text="${p.apartment.name}" ></a></td>
 						<td><a style="width: 100px; height: 120px;"
 							   th:text="${p.email}" alt="IMG-LOGO"></a></td>
 						<td><a style="width: 100px; height: 120px;"

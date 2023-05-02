@@ -14,4 +14,9 @@ public interface BillUtility2Repo extends JpaRepository<BillUtility2, Long> {
     @Query("SELECT bu FROM BillUtility2 bu JOIN bu.bill b WHERE b.id = :bId")
 //    Page<BillUtility2> search_bID(@Param("bId") Long x, Pageable pageable);
     List<BillUtility2> search_bIDs( @Param("bId") Long x);
+
+
+    @Query("SELECT sum(bu.unitPrice) FROM BillUtility2 bu WHERE bu.bill.id = :bId")
+//    Page<BillUtility2> search_bID(@Param("bId") Long x, Pageable pageable);
+    Long getTotalPrice(@Param("bId") Long x);
 }

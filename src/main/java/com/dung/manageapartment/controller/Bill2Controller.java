@@ -1,19 +1,13 @@
 package com.dung.manageapartment.controller;
 
 import com.dung.manageapartment.model.Apartment;
-import com.dung.manageapartment.model.Bill;
 import com.dung.manageapartment.model.Bill2;
 import com.dung.manageapartment.model.BillUtility2;
 import com.dung.manageapartment.repository.ApartmentRepository;
 import com.dung.manageapartment.repository.Bill2Repo;
 import com.dung.manageapartment.repository.BillUtility2Repo;
 import com.dung.manageapartment.service.Bill2Service;
-import com.dung.manageapartment.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

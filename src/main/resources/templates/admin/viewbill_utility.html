@@ -41,28 +41,24 @@
 			id="myTable">
 			<thead class="thead-dark">
 				<tr>
-					<th>Id</th>
-					<th>Bill_id</th>
 					<th>Apartment</th>
-					<th>Utility_name</th>
-					<th>Utility_unitprice</th>
+					<th>Utility</th>
+					<th>Unit Price</th>
 					<th>Quantity</th>
-					<th>UnitPrice</th>
+					<th>Amout</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<th:block th:each="b : ${bill_utilities}">
 					<tr>
-						<td><span th:text="${b.id}"></span></td>
-						<td><a th:text="${b.bill.id}"></a></td>
 						<td><a th:text="${b.bill.apartment.name}"></a></td>
 						<td><span th:text="${b.utility.name}"></span></td>
 						<td><span th:text="${b.utility.unitPrice}"></span></td>
 						<td><span th:text="${b.quantity}"></span></td>
 						<td><span th:text="${b.unitPrice}"></span></td>
 						<td><div class="btn-group">
-								<a th:href="@{'/admin/apartment/edit/' + ${b.id}}" class="btn btn-success">Edit</a>
+								<a th:href="@{/admin/bill/viewbill}" class="btn btn-success">Back</a>
 
 <!--									th:href="@{'/admin/apartment/delete/' + ${b.id}}">Xóa</a>-->
 							</div></td>

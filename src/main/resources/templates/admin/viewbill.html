@@ -1,117 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Manage Apartment</title>
+    <meta charset="ISO-8859-1">
+    <title>Manage Apartment</title>
 
-<!-- Latest compiled and minified CSS -->
-<link th:rel="stylesheet"
-	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}"></link>
-<!-- jQuery library -->
-<script
-	th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link th:rel="stylesheet"
+          th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}"></link>
+    <!-- jQuery library -->
+    <script
+            th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
 
-<!-- Popper JS -->
-<script
-	th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <!-- Popper JS -->
+    <script
+            th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js}"></script>
 
-<!-- Latest compiled JavaScript -->
-<script
-	th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+    <!-- Latest compiled JavaScript -->
+    <script
+            th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
 
-<link rel="stylesheet" th:href="@{/css/viewperson.css}"></link>
+    <link rel="stylesheet" th:href="@{/css/viewperson.css}"></link>
 
 </head>
 <body>
-	<div th:replace="/admin/header :: header"></div>
-	<div class="container">
-		<h2>
-			<b>APARTMENT INFORMATION</b>
-		</h2>
-		<div style="display: flex; align-items: center;">
-			<form style="margin : 5px" th:action="@{/admin/bill}">
-				<a class="btn btn-warning" th:href="@{/admin/bill/add}">Create new bill</b>
-				</a>
-			</form>
-			<div class="box_search"></div>
-		</div>
+<div th:replace="/admin/header :: header"></div>
+<div class="container">
+    <h2>
+        <b>APARTMENT INFORMATION</b>
+    </h2>
+    <div style="display: flex; align-items: center;">
+        <form style="margin : 5px" th:action="@{/admin/bill}">
+            <a class="btn btn-warning" th:href="@{/admin/bill/add}">Create new bill</b>
+            </a>
+        </form>
+        <div class="box_search"></div>
+    </div>
 
-		<table
-			class="table table-bordered table-striped table-responsive-stack"
-			id="myTable">
-			<thead class="thead-dark">
-				<tr>
-					<th>Id</th>
-					<th>Apartment</th>
-					<th>PriceTotal</th>
-					<th>Status</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				<th:block th:each="b : ${all}">
-					<tr>
-						<td><span th:text="${b.id}"></span></td>
-						<td><a th:text="${b.apartment.name}"></a></td>
-<!--						<td><span th:text="${b.priceTotal}"></span></td>-->
-						<td><span th:each="utility : ${b.billUtilities}">
-							<span th:text="${utility.unitPrice}"></span>
-						</span></td>
-						<td><span th:text="${b.status}"></span></td>
-						<td><div class="btn-group">
-								<a th:href="@{'/admin/bill/chi-tiet?billId=' + ${b.id}}" class="btn btn-success">Chi tiết</a>
+    <table
+            class="table table-bordered table-striped table-responsive-stack"
+            id="myTable">
+        <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Apartment</th>
+            <th>PriceTotal</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="b : ${all}">
+            <tr>
+                <td><span th:text="${b.id}"></span></td>
+                <td><a th:text="${b.apartment.name}"></a></td>
+                <!--						<td><span th:text="${b.priceTotal}"></span></td>-->
+                <td>
+                    <span th:if="${b.priceTotal != null}" th:text="${b.priceTotal}"></span>
+                    <span th:if="${b.priceTotal == null}" >N/A</span>
+                </td>
+                </span></td>
+                <td><span th:text="${b.status}"></span></td>
+                <td>
+                    <div class="btn-group">
+                        <a th:href="@{'/admin/bill/chi-tiet?billId=' + ${b.id}}" class="btn btn-success">Detail</a>
 
-<!--									th:href="@{'/admin/apartment/delete/' + ${b.id}}">Xóa</a>-->
-							</div></td>
-					</tr>
-				</th:block>
-			</tbody>
-		</table>
+                        <!--									th:href="@{'/admin/apartment/delete/' + ${b.id}}">Xóa</a>-->
+                    </div>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
 
-	</div>
-	<div th:replace="/admin/footer :: footer"></div>
+</div>
+<div th:replace="/admin/footer :: footer"></div>
 
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-	<script>
-		$(document).ready(function() {
-			var table = $('#myTable').DataTable();
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        var table = $('#myTable').DataTable();
 
-			// Tạo ô input để nhập từ khóa tìm kiếm
-			// $('#myTable_filter').prepend('<input type="text" id="searchBox" placeholder="Search..."/>');
+        // Tạo ô input để nhập từ khóa tìm kiếm
+        // $('#myTable_filter').prepend('<input type="text" id="searchBox" placeholder="Search..."/>');
 
-			// Sự kiện khi nhập từ khóa tìm kiếm
-			$('#searchBox').keyup(function() {
-				table.search($(this).val()).draw();
-			});
-			$("#myTable_filter").appendTo(".box_search");
-		} );
-	</script>
+        // Sự kiện khi nhập từ khóa tìm kiếm
+        $('#searchBox').keyup(function () {
+            table.search($(this).val()).draw();
+        });
+        $("#myTable_filter").appendTo(".box_search");
+    });
+</script>
 
 </body>
 </html>
 <style>
-	.box_search {
-		margin: 0 0 0 15px;
-	}
-	.box_search #myTable_filter label {
-		margin: 0;
-		font-size: 16px;
-		font-weight: 600;
-	}
-	#myTable_filter input {
-		height: 38px;
-		border: 1px solid #d3d3d3;
-		margin: 0 0 0 10px;
-		border-radius: 5px;
-	}
-	.container > h2 {
-		margin: 50px 0;
-	}
-	div#myTable_wrapper {
-		margin: 10px 0 0;
-	}
-	#myTable_wrapper tbody tr td, #myTable_wrapper thead tr th {
-		text-align: center;
-	}
+    .box_search {
+        margin: 0 0 0 15px;
+    }
+
+    .box_search #myTable_filter label {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    #myTable_filter input {
+        height: 38px;
+        border: 1px solid #d3d3d3;
+        margin: 0 0 0 10px;
+        border-radius: 5px;
+    }
+
+    .container > h2 {
+        margin: 50px 0;
+    }
+
+    div#myTable_wrapper {
+        margin: 10px 0 0;
+    }
+
+    #myTable_wrapper tbody tr td, #myTable_wrapper thead tr th {
+        text-align: center;
+    }
 </style>

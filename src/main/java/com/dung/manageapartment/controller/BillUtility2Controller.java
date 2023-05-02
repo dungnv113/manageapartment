@@ -5,6 +5,7 @@ import com.dung.manageapartment.repository.Bill2Repo;
 import com.dung.manageapartment.repository.BillUtility2Repo;
 import com.dung.manageapartment.repository.UtilityRepository;
 import com.dung.manageapartment.service.Bill2Service;
+import com.dung.manageapartment.service.BillUtility2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,9 @@ public class BillUtility2Controller {
 
     @Autowired
     BillUtility2Repo billUtility2Repo;
+
+    @Autowired
+    BillUtility2Service billUtility2Service;
     @Autowired
     UtilityRepository utilityRepository;
 
@@ -42,23 +46,15 @@ public class BillUtility2Controller {
 
 
         Optional<Utility> utility = utilityRepository.findById(billUtility2.getUtility().getId());
-        System.out.println(utilityRepository.findById(billUtility2.getUtility().getId()));
-        System.out.println(utility.get().getUnitPrice());
+
 
         long unitPrice = billUtility2.getQuantity() * utility.get().getUnitPrice();
-        System.out.println(unitPrice + " 52");
-
         billUtility2.setUnitPrice(unitPrice);
         billUtility2Repo.save(billUtility2);
+        Long priceTotal =billUtility2Service.getTotalPrice(billUtility2.getBill().getId());
+        bill2Service.updateTotalPrice(priceTotal,billUtility2.getBill().getId());
 
-//        long totalPrice = 0L;
-//        totalPrice =  totalPrice + (billUtility2.getQuantity() * billUtility2.getUnitPrice());
-//        System.out.println(totalPrice + " 59");
 
-//        Bill2 bill2 = new Bill2();
-//        List<Bill2> list = bill2Repo.search_apartID(apartmentId);
-//        bill2.setPriceTotal(totalPrice);
-//        bill2Repo.save(bill2);
         return "redirect:/admin/bill/viewbill";
     }
 
